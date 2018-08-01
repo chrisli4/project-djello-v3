@@ -15,7 +15,7 @@ import { DATA_REQUEST_SUCCESS } from '../dashboard/constants'
 import { BOARD_DELETE_SUCCESS } from '../board/constants'
 import { LIST_DELETE_SUCCESS } from '../list/constants'
 
-import { deleteByObj, deleteByArr, deleteByProp } from '../lib/reducers'
+import { deleteByObj, deleteByProp } from '../lib/reducers'
 
 const initialState = {
 	byId: {},
@@ -34,7 +34,7 @@ const reducer = function(state = initialState, action) {
 				requesting: true,
 				successful: false,
 				messages: [{
-					body: `${action.card.id} being created...`,
+					body: `${action.card.title} being created...`,
 					time: Date.now()
 				}],
 				errors: []
@@ -46,13 +46,13 @@ const reducer = function(state = initialState, action) {
 				requesting: false,
 				successful: true,
 				messages: [{
-					body: `${action.card.id} created!`,
+					body: `${action.card._id} created!`,
 					time: Date.now()
 				}],
 				errors: [],
 				byId: {
 					...state.byId,
-					[action.card.id]: action.card
+					[action.card._id]: action.card
 				}
 			}
 
@@ -73,7 +73,10 @@ const reducer = function(state = initialState, action) {
 				...state,
 				byId: {
 					...state.byId,
-					[action.card.id]: action.card
+					[action.card._id]: {
+						...state.byId[action.card._id],
+						[action.field]: action.value
+					}
 				}
 			}
 
@@ -83,7 +86,7 @@ const reducer = function(state = initialState, action) {
 				requesting: true,
 				successful: false,
 				messages: [{
-					body: `${action.card.id} being updated...`,
+					body: `${action.card._id} being updated...`,
 					time: Date.now()
 				}],
 				errors: [],
@@ -95,7 +98,7 @@ const reducer = function(state = initialState, action) {
 				requesting: false,
 				successful: true,
 				messages: [{
-					body: `${action.card.id} updated!`,
+					body: `${action.card._id} updated!`,
 					time: Date.now()
 				}],
 				errors: [],
@@ -119,7 +122,7 @@ const reducer = function(state = initialState, action) {
 				requesting: true,
 				successful: false,
 				messages: [{
-					body: `${action.card.id} being deleted...`,
+					body: `${action.card._id} being deleted...`,
 					time: Date.now()
 				}],
 				errors: [],
@@ -131,7 +134,7 @@ const reducer = function(state = initialState, action) {
 				requesting: false,
 				successful: true,
 				messages: [{
-					body: `${action.card.id} deleted!`,
+					body: `${action.card._id} deleted!`,
 					time: Date.now()
 				}],
 				errors: [],
@@ -165,7 +168,7 @@ const reducer = function(state = initialState, action) {
 		case LIST_DELETE_SUCCESS:
 			return {
 				...state,
-				byId: deleteByProp(state.byId, 'listId', action.list.id)
+				byId: deleteByProp(state.byId, 'listId', action.list._id)
 			}
 
 		default:

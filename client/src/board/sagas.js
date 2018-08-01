@@ -15,8 +15,8 @@ import { BOARD_CREATE, BOARD_UPDATE_SUBMIT, BOARD_DELETE } from './constants'
 function* boardCreateFlow(action) {
 	try {
 		const { user, board } = action
-		const URL = `${process.env.REACT_APP_API_URL}/users/${user.username}/boards/`
-		const created = yield call(fetchAPI(URL, makeOptions('POST', user, board)))
+		const URL = `http://localhost:3001/users/${user.username}/boards/`
+		const created = yield call(fetchAPI, URL, makeOptions('POST', user, { board: board }))
 		yield put(boardCreateSuccess(created))
 	} catch(e) {
 		yield put(boardCreateError(e))
@@ -26,19 +26,19 @@ function* boardCreateFlow(action) {
 function* boardUpdateFlow(action) {
 	try {
 		const { user, board } = action
-		const URL = `${process.env.REACT_APP_API_URL}/users/${user.username}/boards/${board.id}`
-		const updated = yield call(fetchAPI(URL, makeOptions('PUT', user, board)))
+		const URL = `http://localhost:3001/users/${user.username}/boards/${board._id}`
+		const updated = yield call(fetchAPI, URL, makeOptions('PUT', user, { board: board }))
 		yield put(boardUpdateSuccess(updated))
 	} catch(e) {
-		yield put(boardCreateError(e))
+		yield put(boardUpdateError(e))
 	}
 }
 
 function* boardDeleteFlow(action) {
 	try {
 		const { user, board } = action
-		const URL = `${process.env.REACT_APP_API_URL}/users/${user.username}/boards/${board.id}`
-		const deleted = yield call(fetchAPI(URL, makeOptions('DELETE', user, board)))
+		const URL = `http://localhost:3001/users/${user.username}/boards/${board._id}`
+		const deleted = yield call(fetchAPI, URL, makeOptions('DELETE', user, { board: board }))
 		yield put(boardDeleteSuccess(deleted))
 	} catch(e) {
 		yield put(boardDeleteError(e))

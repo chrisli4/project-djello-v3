@@ -1,5 +1,4 @@
 import {
-	CARD_SET,
 	CARD_CREATE,
 	CARD_CREATE_SUCCESS,
 	CARD_CREATE_ERROR,
@@ -18,7 +17,7 @@ export const cardCreate 		= makeActionCreator(CARD_CREATE, 'user', 'card')
 export const cardCreateSuccess = makeActionCreator(CARD_CREATE_SUCCESS, 'card')
 export const cardCreateError 	= makeActionCreator(CARD_CREATE_ERROR, 'error')
 
-export const cardUpdate 		= makeActionCreator(CARD_UPDATE, 'card')
+export const cardUpdate 		= makeActionCreator(CARD_UPDATE, 'card', 'field', 'value')
 export const cardUpdateSubmit	= makeActionCreator(CARD_UPDATE_SUBMIT, 'user', 'card')
 export const cardUpdateSuccess = makeActionCreator(CARD_UPDATE_SUCCESS, 'card')
 export const cardUpdateError 	= makeActionCreator(CARD_UPDATE_ERROR, 'error')

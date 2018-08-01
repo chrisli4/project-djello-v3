@@ -1,5 +1,4 @@
 import {
-	LIST_SET,
 	LIST_CREATE,
 	LIST_CREATE_SUCCESS,
 	LIST_CREATE_ERROR,
@@ -18,7 +17,7 @@ export const listCreate 		= makeActionCreator(LIST_CREATE, 'user', 'list')
 export const listCreateSuccess = makeActionCreator(LIST_CREATE_SUCCESS, 'list')
 export const listCreateError 	= makeActionCreator(LIST_CREATE_ERROR, 'error')
 
-export const listUpdate 		= makeActionCreator(LIST_UPDATE, 'list')
+export const listUpdate 		= makeActionCreator(LIST_UPDATE, 'list', 'field', 'value')
 export const listUpdateSubmit	= makeActionCreator(LIST_UPDATE_SUBMIT, 'user', 'list')
 export const listUpdateSuccess = makeActionCreator(LIST_UPDATE_SUCCESS, 'list')
 export const listUpdateError 	= makeActionCreator(LIST_UPDATE_ERROR, 'error')

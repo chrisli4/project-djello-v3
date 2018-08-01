@@ -1,45 +1,51 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { applyMiddleware, createStore, compose } from 'redux' 
-import { Provider } from 'react-redux' 
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+
+import createHistory from 'history/createBrowserHistory'
+import { Route } from 'react-router'
+
 import createSagaMiddleware from 'redux-saga'
+import registerServiceWorker from './registerServiceWorker'
+
+import {
+	ConnectedRouter,
+	routerMiddleware,
+	push
+} from 'react-router-redux'
+
+import App from './App'
 import IndexReducer from './index-reducer'  
 import IndexSagas from './index-sagas'
 
-import createHistory from "history/createBrowserHistory";
-import { Route } from "react-router";
+import 'bootstrap/dist/css/bootstrap.css';
+import 'mdbreact/dist/css/mdb.css';
 
-import { ConnectedRouter, routerMiddleware, push } from "react-router-redux";
-
-
-import App from './App';
-
-const history = createHistory();
-const middleware = routerMiddleware(history);
-
+const history = createHistory()
+const middleware = routerMiddleware(history)
 const sagaMiddleware = createSagaMiddleware()
 
 const composeSetup = process.env.NODE_ENV !== 'production' && typeof window === 'object' &&  
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
-/*eslint-enable */
 
-const store = createStore(  
+const store = createStore(
 	IndexReducer,
-  composeSetup(applyMiddleware(sagaMiddleware, middleware)), // allows redux devtools to watch sagas
+	composeSetup(applyMiddleware(sagaMiddleware, middleware)), 
   )
 
-// Begin our Index Saga
 sagaMiddleware.run(IndexSagas)
+registerServiceWorker();
 
-// Setup the top level router component for our React Router
-ReactDOM.render(  
+ReactDOM.render(
 	<Provider store={store}>
 		<ConnectedRouter history={history}>
 			<App />
 		</ConnectedRouter>
-	</Provider>,
-	document.getElementById('root'),
-	)
+	</Provider>, 
+	document.getElementById('root')
+	);
 
 export { history };
