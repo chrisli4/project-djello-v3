@@ -17,30 +17,30 @@ mongooseeder.seed({
   mongoose: mongoose,
   seeds: () => {
 
-  	console.log('Creating Boards');
-  	var boards = [];
-  	for (let i = 1; i < 6; i++) {
-  		var board = new Board({
-  			_id: `foo${ i }`,
-  			userId: 'user1',
-  			title: faker.name.title(),
-  			description: faker.name.jobDescriptor(),
-  		})
-  	boards.push(board);
-  	}
+    console.log('Creating Boards');
+    var boards = [];
+    for (let i = 1; i < 6; i++) {
+      var board = new Board({
+        _id: `foo${ i }`,
+        userId: 'test1',
+        title: faker.name.title(),
+        description: faker.name.jobDescriptor(),
+      })
+    boards.push(board);
+    }
 
-  	
+    
 
-  	console.log('Saving...');
-  	var promises = [];
-  	[
-  		boards
-  	].forEach(collection => {
-  		collection.forEach(model => {
-  			promises.push(model.save());
-  		});
-  	});
-  	return Promise.all(promises);
-	}
+    console.log('Saving...');
+    var promises = [];
+    [
+      boards
+    ].forEach(collection => {
+      collection.forEach(model => {
+        promises.push(model.save());
+      });
+    });
+    return Promise.all(promises);
+  }
 
 });

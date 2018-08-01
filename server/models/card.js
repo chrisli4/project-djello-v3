@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const User = require('./user');
 const List = require('./list');
-const Activity = require('./activity');
 const Schema = mongoose.Schema;
 
 const CardSchema = new Schema({
-	id: {
+	_id: {
 		type: String,
 		required: true
 	},
@@ -33,21 +32,21 @@ const CardSchema = new Schema({
 			return members
 		}
 	},
-	activity: [{ type: String, ref: 'Activity' }],
 	_previousMembers: []
 })
 
 CardSchema.pre('remove', function(next) {
-	this.model('List').update({ cards: this.id }, { $pull: { cards: this.id } }, next)
+	this.model('List').update({ cards: this._id }, { $pull: { cards: this._id } }, next)
 });
 
+/*
 CardSchema.pre('remove', function(next) {
-	this.model('Activity').remove({ cardId: this.id }, next)
+	this.model('Activity').remove({ cardId: this._id }, next)
 })
 
 CardSchema.pre('save', function(next) {
 	if(this.isNew)
-		this.model('List').update({ id: this.listId }, { $push: { cards: this.id } }, next)
+		this.model('List').update({ _id: this.listId }, { $push: { cards: this._id } }, next)
 	else
 		next();
 });
@@ -55,15 +54,15 @@ CardSchema.pre('save', function(next) {
 CardSchema.pre('save', function(next) {
 	
 	let toAdd = diff(this.members, this._previousMembers)
-	
-	this.model('User').update({ id: { $in: toAdd } }, { multi: true }, { $addToSet: { pending: this.id } }, next)
+		
+	this.model('User').update({ _id: { $in: toAdd } }, { multi: true }, { $addToSet: { pending: this._id } }, next)
 })
 
 CardSchema.pre('save', function(next) {
 
 	let toDelete = diff(this._previousMembers, this.members)
 
-	this.model('User').update({ id: { $in: toDelete } }, { multi: true }, { $pull: { cards: this.id } }, next)
+	this.model('User').update({ _id: { $in: toDelete } }, { multi: true }, { $pull: { cards: this._id } }, next)
 })
 
 function diff(a, b) {
@@ -71,25 +70,8 @@ function diff(a, b) {
 		return b.indexOf(i) === -1
 	})
 }
+*/
 
 module.exports = mongoose.model('Card', CardSchema)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const List = require('./list');
 
 const BoardSchema = new Schema({
-	id: {
+	_id: {
 		type: String,
 		required: true
 	},
@@ -18,6 +18,7 @@ const BoardSchema = new Schema({
 	description: {
 		type: String,
 	},
+	members: [],
 	lists: [{ type: String, ref: 'List' }]
 })
 

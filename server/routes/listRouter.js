@@ -1,12 +1,13 @@
 const router = require('express').Router({ mergeParams: true })
 const cardRouter = require('./cardRouter')
+const shortid = require('shortid')
 
 const List = require('../models/list')
 
 // get list
 router.get('/:listId', function(req, res) {
 
-	List.findById(req.params.listId)
+	List.findOne({ _id: req.params.listId })
 	.then(list =>
 		res.status(200).json(list)
 		)
@@ -22,7 +23,7 @@ router.post('/', function(req, res) {
 
 	let list = new List({
 		_id: shortid.generate(),
-		userId: input.userId,
+		boardId: input.boardId,
 		title: input.title,
 		description: input.description
 	})
@@ -41,7 +42,7 @@ router.put('/:listId', function(req, res) {
 	
 	let input = req.body.list
 
-	List.findById(input._id)
+	List.findOne({ _id: input._id })
 	.then(list =>
 		Object.assign(list, { ...input })
 		)
@@ -57,11 +58,11 @@ router.put('/:listId', function(req, res) {
 })
 
 // delete list
-router.delete('/:listId', function() {
+router.delete('/:listId', function(req, res) {
 
 	let input = req.body.list
 
-	List.findById(input._id)
+	List.findOne({ _id: input._id })
 	.then(list =>
 		list.remove()
 		)

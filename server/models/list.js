@@ -4,7 +4,7 @@ const Board = require('./board');
 const Card = require('./card');
 
 const ListSchema = new Schema({
-	id: {
+	_id: {
 		type: String,
 		required: true
 	},
@@ -24,19 +24,19 @@ const ListSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
-	cards: [{ type: String, ref: 'Card' }]
+	cards: [{ type: String, ref: 'Card', default: [] }]
 })
 
 ListSchema.pre('remove', function(next) {
-	this.model('Board').update({ lists: this.id }, { $pull: { lists: this.id } })
+	this.model('Board').update({ lists: this._id }, { $pull: { lists: this._id } })
 		.then(() => {
-			this.model('Card').remove({ listId: this.id }, next);
+			this.model('Card').remove({ listId: this._id }, next);
 		})
 });
 
 ListSchema.pre('save', function(next) {
 	if(this.isNew)
-		this.model('Board').update({ id: this.boardId }, { $push: { lists: this.id } }, next);
+		this.model('Board').update({ _id: this.boardId }, { $push: { lists: this._id } }, next);
 	else
 		next();
 })

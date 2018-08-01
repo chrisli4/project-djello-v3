@@ -4,9 +4,12 @@ const bcrypt = require('bcrypt-nodejs');
 const Card = require('./card');
 
 const UserSchema = new Schema({
+	_id: {
+		type: String,
+		required: true,
+	},
 	username: {
 		type: String,
-		lowercase: true,
 		required: true,
 		unique: true,
 	},
@@ -16,18 +19,16 @@ const UserSchema = new Schema({
 		unique: true,
 		required: true
 	},
-	firstName: {
-		type: String
-	},
-	lastName: {
-		type: String
-	},
 	password: {
 		type: String,
 		required: true
 	},
+	profile: {
+		firstName: { type: String },
+		lastName: { type: String }
+	},
 	token: {
-		type: String
+		type: String,
 	},
 	resetPasswordToken: { type: String },
 	resetPasswordExpires: { type: Date }
@@ -38,7 +39,7 @@ const UserSchema = new Schema({
 
 UserSchema.pre('save', function(next) {
 	const user = this,
-	SALT_FACTOR = 5;
+		  SALT_FACTOR = 5;
 
 	if (!user.isModified('password')) return next();
 

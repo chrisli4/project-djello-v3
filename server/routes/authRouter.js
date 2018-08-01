@@ -64,10 +64,12 @@ exports.register = function(req, res, next) {
 		}
 
 		let user = new User({
+			_id: shortid.generate(),
 			username: username,
 			email: email,
 			password: password,
-			profile: { firstName: firstName, lastName: lastName }
+			firstName: firstName, 
+			lastName: lastName
 		})
 
 		user.save(function(err, user) {

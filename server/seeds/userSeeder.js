@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const mongooseeder = require('mongooseeder');
 const User = require('../models/user');
+const shortid = require('shortid');
 
 const faker = require('faker')
 
@@ -19,7 +20,8 @@ mongooseeder.seed({
   	var users = [];
   	for (let i = 1; i < 6; i++) {
   		var user = new User({
-  			_id: `user${ i }`,
+        _id: shortid.generate(),
+        username: `test${ i }`,
         email: faker.internet.email(),
         password: '123',
   		})
@@ -37,5 +39,4 @@ mongooseeder.seed({
   	});
   	return Promise.all(promises);
 	}
-
 });

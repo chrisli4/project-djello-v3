@@ -7,7 +7,7 @@ const Board = require('../models/board')
 // get board
 router.get('/:boardId', function(req, res) {
 
-	Board.findOne({ id: req.params.boardId })
+	Board.findOne({ _id: req.params.boardId })
 	.then(board =>
 		res.status(200).json(board)
 		)
@@ -22,7 +22,7 @@ router.post('/', function(req, res) {
 	let input = req.body.board
 
 	let board = new Board({
-		id: shortid.generate(),
+		_id: shortid.generate(),
 		userId: input.userId,
 		title: input.title,
 		description: input.description
@@ -42,7 +42,7 @@ router.put('/:boardId', function(req, res) {
 	
 	let input = req.body.board
 
-	Board.findById(input._id)
+	Board.findOne({ _id: input._id })
 	.then(board =>
 		Object.assign(board, { ...input })
 		)
@@ -58,11 +58,11 @@ router.put('/:boardId', function(req, res) {
 })
 
 // delete board
-router.delete('/:boardId', function() {
+router.delete('/:boardId', function(req, res) {
 
 	let input = req.body.board
 
-	Board.findById(input._id)
+	Board.findOne({ _id: input._id })
 	.then(board =>
 		board.remove()
 		)

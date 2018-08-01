@@ -1,11 +1,19 @@
 const router = require('express').Router({ mergeParams: true })
+const shortid = require('shortid')
 
 const Card = require('../models/card')
+const History = require('../models/history')
+
+function diff(a, b) {
+	return a.filter(i =>
+		b.indexOf(i) === -1
+	)
+}
 
 // get card
 router.get('/:cardId', function(req, res) {
 
-	Card.findById(req.params.cardId)
+	Card.findOne({ _id: req.params.cardId })
 	.then(card =>
 		res.status(200).json(card)
 		)
@@ -21,7 +29,7 @@ router.post('/', function(req, res) {
 
 	let card = new Card({
 		_id: shortid.generate(),
-		userId: input.userId,
+		listId: input.listId,
 		title: input.title,
 		description: input.description
 	})
@@ -36,11 +44,12 @@ router.post('/', function(req, res) {
 })
 
 // update card
+
 router.put('/:cardId', function(req, res) {
 	
 	let input = req.body.card
 
-	Card.findById(input._id)
+	Card.findOne({ _id: input._id })
 	.then(card =>
 		Object.assign(card, { ...input })
 		)
@@ -55,12 +64,13 @@ router.put('/:cardId', function(req, res) {
 		)
 })
 
+
 // delete card
-router.delete('/:cardId', function() {
+router.delete('/:cardId', function(req, res) {
 
 	let input = req.body.card
 
-	Card.findById(input._id)
+	Card.findOne({ _id: input._id })
 	.then(card =>
 		card.remove()
 		)
@@ -71,5 +81,7 @@ router.delete('/:cardId', function() {
 		res.status(500).json(e)
 		)
 })
+
+
 
 module.exports = router

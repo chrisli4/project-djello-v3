@@ -50,7 +50,7 @@ app.post('/login', requireLogin, authController.login);
 app.use('/users', userRouter);
 
 // server  ====================================================================
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 3001));
 app.listen(app.get('port'), () => {
 	console.log(`Find the server at ${app.get('port')}`);
 });

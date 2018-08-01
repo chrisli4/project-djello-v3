@@ -8,11 +8,12 @@ const TeamSchema = new Schema({
 	userId: {
 		type: String,
 		ref: 'User',
-		required: true
+		required: true,
+		unique: true
 	},
 	team: [{ type: String, ref: 'User' }],
-	teamRequests: [{ type: String, ref: 'User' }],
-	teamInvites: [{ type: String, ref: 'User' }],
+	teamSent: [{ type: String, ref: 'User' }],
+	teamReceived: [{ type: String, ref: 'User' }],
 	cards: [{ type: String, ref: 'Card' }],
 },
 {

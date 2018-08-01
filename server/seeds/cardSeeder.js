@@ -17,32 +17,32 @@ mongooseeder.seed({
   mongoose: mongoose,
   seeds: () => {
 
-  	console.log('Creating Cards');
-  	var cards = [];
-  	for(let i = 1; i < 131; i++) {
+    console.log('Creating Cards');
+    var cards = [];
+    for(let i = 1; i < 131; i++) {
 
-  		let genRan = getRandomInt(1, 39);
+      let genRan = getRandomInt(1, 39);
 
-  		var card = new Card({
-  			_id: `foobar${ i }`,
-  			listId: `bar${ genRan }`,
-  			title: faker.name.title(),
-  			description: faker.lorem.words(),
-  		})
+      var card = new Card({
+        _id: `foobar${ i }`,
+        listId: `bar${ genRan }`,
+        title: faker.name.title(),
+        description: faker.lorem.words(),
+      })
 
-  	cards.push(card);
-  	}
+    cards.push(card);
+    }
 
-  	console.log('Saving...');
-  	var promises = [];
-  	[
-  		cards
-  	].forEach(collection => {
-  		collection.forEach(model => {
-  			promises.push(model.save());
-  		});
-  	});
-  	return Promise.all(promises);
-	}
+    console.log('Saving...');
+    var promises = [];
+    [
+      cards
+    ].forEach(collection => {
+      collection.forEach(model => {
+        promises.push(model.save());
+      });
+    });
+    return Promise.all(promises);
+  }
 
 });

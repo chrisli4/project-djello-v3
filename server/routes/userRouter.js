@@ -1,3 +1,4 @@
+
 const router = require('express').Router({ mergeParams: true })
 const boardRouter = require('./boardRouter')
 const teamRouter = require('./teamRouter')
@@ -59,12 +60,12 @@ router.get('/:username/data', function(req, res) {
 
 	let username = req.params.username
 
-	Promise.all([boardsByUser(username), listsByUser(username), cardsByUser(username), teamCardsByUser(username)])
-	.then(data => 
+	Promise.all([boardsByUser(username), listsByUser(username), cardsByUser(username)])
+	.then(data =>
 		res.status(200).json({
 			boards: data[0],
 			lists: data[1],
-			cards: Object.assign(data[2], data[3])
+			cards: data[2]
 		})
 		)
 	.catch(e =>
