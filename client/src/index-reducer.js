@@ -1,6 +1,8 @@
 import React from 'react'
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import signup from './signup/reducer'
+import login from './login/reducer'
 import user from './user/reducer'
 import dashboard from './dashboard/reducer'
 import boards from './board/reducer';
@@ -14,6 +16,8 @@ const initialState = {
 };
 
 const IndexReducer = combineReducers({
+	signup,
+	login,
 	user,
 	dashboard,
 	boards,

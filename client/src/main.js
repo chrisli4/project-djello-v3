@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router'
+import { Route, Switch } from 'react-router'
+
+import Navbar from './components/navbar'
+import Dashboard from './dashboard'
 
 class Main extends Component {
 	render() {
 		return (
 			<div>
 				<Navbar />
-				<Container className='mt-3 pt-3'>
+				<div className='mt-3 pt-3'>
 					<Switch>
-						<Route path='/home/dashboard' component={Dashboard} />
-						<Route path='/home/team' component={Team} />
-						<Route path='/home/profile' component={Profile} />
+						<Route path='/' component={Dashboard} />
 					</Switch>
-				</Container>
+				</div>
 			</div>
 		)
 	}

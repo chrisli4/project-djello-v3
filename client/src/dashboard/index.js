@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Row } from 'mdbreact'
+import { Container, Row } from 'mdbreact'
 
 import { dataRequest } from './actions'
 import { userSet } from '../user/actions'
@@ -19,14 +19,13 @@ class Dashboard extends Component {
 
 	render() {
 		return (
-			<div>
+			<Container>
 				<Row className='justify-content-end'>
-					<BoardForm />
 					<BoardDropdown />
-
+					<BoardForm />
 				</Row>
 				<Board/>
-			</div>
+			</Container>
 		)
 	}
 

@@ -8,6 +8,7 @@ import { cardCreate } from '../card/actions';
 import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row } from 'mdbreact'
 
 import CustomCard from '../card'
+import CardForm from '../card/form'
 
 class List extends Component {
 	
@@ -58,18 +59,18 @@ class List extends Component {
 		return (
 			<Card>
 				<CardHeader border="primary" color="primary-color">
-									<Row>
-					<div onDoubleClick={this.onDisableTitle}>
-						<input onChange={this.onUpdate} disabled={this.state.disableTitle} name='title' value={this.props.list.title}/>
-					</div>
-				</Row>
 				<Row>
-					<div onDoubleClick={this.onDisableDescr}>
-						<input onChange={this.onUpdate} disabled={this.state.disableDescr} name='description' value={this.props.list.description}/>
+					<div onDoubleClick={this.onDisableTitle} className='mx-auto'>
+						<input onChange={this.onUpdate} disabled={this.state.disableTitle} name='title' value={this.props.list.title} className='form-control-plaintext text-center white-text'/>
 					</div>
 				</Row>
 				</CardHeader>
 				<CardBody>
+								
+					<div onDoubleClick={this.onDisableDescr} className='mx-auto'>
+						<textarea onChange={this.onUpdate} disabled={this.state.disableDescr} name='description' value={this.props.list.description} rows="3" spellCheck="false" className="form-control-plaintext small py-3 px-2 mb-3"/>
+					</div>
+				
 				<ListGroup>
 					{ this.props.list.cards.map(cardId =>
 						<CustomCard key={cardId} _id={cardId} />
@@ -77,9 +78,10 @@ class List extends Component {
 				</ListGroup>
 				</CardBody>
 				<CardFooter>
-					<Row>
-					<button onClick={this.onUpdateSubmit}>Submit</button>
-					<button onClick={this.onDelete}>Delete</button>
+					<Row className='justify-content-center'>
+						<CardForm _id={this.props.list._id} />
+						<span onClick={this.onUpdateSubmit} className='p-2 small border border-light grey lighten-5'>Save List</span>
+						<span onClick={this.onDelete} className='p-2 small border border-light grey lighten-5 rounded-right'>Delete List</span>
 					</Row>
 				</CardFooter>
 			</Card>

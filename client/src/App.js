@@ -1,16 +1,27 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router'
-import { Container } from 'mdbreact'
+import { Route, Switch } from 'react-router'
 
-import Dashboard from './dashboard'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStroopwafel, faPlus, faUsers, faUser, faHome, faChalkboard, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+
+import { Container } from 'mdbreact'
+import Main from './main'
+import Login from './login'
+import Signup from './signup'
+
+library.add(faStroopwafel, faPlus, faUsers, faUser, faHome, faChalkboard, faSignOutAlt)
+
 
 class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Container>
-					<Dashboard />
-				</Container>
+					<Switch>
+						<Route path='/register' component={Signup} />
+						<Route path='/login' component={Login} />
+						<Route path='/home' component={Main} />
+					</Switch>
 			</div>
 			);
 	}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux'
 
-import { Row } from 'mdbreact'
+import { Button, Row } from 'mdbreact'
 
 import { boardUpdate, boardUpdateSubmit, boardDelete } from './actions';
 
@@ -59,13 +59,13 @@ class Board extends Component {
 		return (
 			<div>
 				<Row>
-					<div onDoubleClick={this.onDisableTitle}>
-						<input onChange={this.onUpdate} disabled={this.state.disableTitle} name='title' value={this.props.board.title}/>
+					<div onDoubleClick={this.onDisableTitle} className='col text-left my-1'>
+						<input onChange={this.onUpdate} disabled={this.state.disableTitle} name='title' value={this.props.board.title} className='form-control-plaintext h1-responsive'/>
 					</div>
 				</Row>
 				<Row>
-					<div onDoubleClick={this.onDisableDescr}>
-						<input onChange={this.onUpdate} disabled={this.state.disableDescr} name='description' value={this.props.board.description}/>
+					<div onDoubleClick={this.onDisableDescr} className='col text-left my-1'>
+						<input onChange={this.onUpdate} disabled={this.state.disableDescr} name='description' value={this.props.board.description} className='form-control-plaintext lead'/>
 					</div>
 				</Row>
 			
@@ -79,8 +79,8 @@ class Board extends Component {
 				</Row>
 				<Row className='my-3 justify-content-end'>
 					<ListForm />
-					<button onClick={this.onUpdateSubmit}>Submit</button>
-					<button onClick={this.onDelete}>Delete</button>
+					<Button color='primary' onClick={this.onUpdateSubmit}>Save</Button>
+					<Button color='danger' onClick={this.onDelete}>Delete Board</Button>
 				</Row>
 			</div>
 			)

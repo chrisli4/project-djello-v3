@@ -4,7 +4,7 @@ import { compose } from 'redux'
 
 import { cardUpdate, cardUpdateSubmit, cardDelete } from './actions';
 
-import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal } from 'mdbreact'
+import { Button, Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal } from 'mdbreact'
 
 import List from '../list'
 import ListForm from '../list/form'
@@ -69,21 +69,31 @@ class CustomCard extends Component {
 		<Modal isOpen={this.state.modalOpen} toggle={this.onToggle} size="lg">
 		<CardHeader className="p-3" color="primary-color">
 					<div onDoubleClick={this.onDisableTitle}>
-						<input onChange={this.onUpdate} disabled={this.state.disableTitle} name='title' value={this.props.card.title}/>
+						<input onChange={this.onUpdate} disabled={this.state.disableTitle} name='title' value={this.props.card.title} className='form-control-plaintext h2-responsive text-center white-text'/>
 					</div>
 		</CardHeader>
 		<CardBody>
+
 			<div className="d-flex justify-content-between">
-						<p className="my-auto"><span>List</span>:{this.props.card.title}</p>
+						<label>In List: {this.props.card.title}</label>
 					</div>
 					<hr/>
+					<label>Description</label>
 					<div onDoubleClick={this.onDisableDescr}>
-						<input onChange={this.onUpdate} disabled={this.state.disableDescr} name='description' value={this.props.card.description}/>
+						<input onChange={this.onUpdate} disabled={this.state.disableDescr} name='description' value={this.props.card.description} rows="3" spellCheck="false" className="form-control-plaintext py-3 px-2 mb-3"/>
+					</div>
+					<hr/>
+					<label>Tasks</label>
+					<hr/>
+					<div>
+					<label>Members</label>
 					</div>
 		</CardBody>
 		<CardFooter>
-					<button onClick={this.onUpdateSubmit}>Submit</button>
-					<button onClick={this.onDelete}>Delete</button>
+		<Row className='justify-content-center'>
+					<Button onClick={this.onUpdateSubmit}>Save</Button>
+					<Button onClick={this.onDelete}>Delete</Button>
+					</Row>
 		</CardFooter>
 		</Modal>
 		</React.Fragment>

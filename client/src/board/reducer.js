@@ -153,7 +153,7 @@ const reducer = function(state = initialState, action) {
 			}],
 			errors: [],
 			byId: deleteByObj(state.byId, action.board),
-			current: Object.keys(state.byId)[0]
+			current: Object.keys(state.byId)[1]
 		}
 
 		case BOARD_DELETE_ERROR:

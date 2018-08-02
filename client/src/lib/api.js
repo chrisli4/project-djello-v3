@@ -27,3 +27,14 @@ export const makeOptions = function(method, user, item) {
 
 	return options
 }
+
+export const makeUserOptions = function(user) {	
+	return {
+		method: 'POST',
+		mode: 'cors',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ ...user })
+	}
+}
