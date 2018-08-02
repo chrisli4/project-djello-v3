@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const mongooseeder = require('mongooseeder');
 const Board = require('../models/board');
-const List = require('../models/list');
 const Card = require('../models/card');
 
 const faker = require('faker')
@@ -12,8 +11,9 @@ function getRandomInt(min, max) {
 
 mongooseeder.seed({
   mongodbUrl: 'mongodb://chris:djellon1@ds051933.mlab.com:51933/djello',
-  models: { List, Card },
-  clean: false,
+  useNewUrlParser: true,
+  models: { Card },
+  clean: true,
   mongoose: mongoose,
   seeds: () => {
 

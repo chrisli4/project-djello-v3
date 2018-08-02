@@ -39,17 +39,17 @@ CardSchema.pre('remove', function(next) {
 	this.model('List').update({ cards: this._id }, { $pull: { cards: this._id } }, next)
 });
 
-/*
-CardSchema.pre('remove', function(next) {
-	this.model('Activity').remove({ cardId: this._id }, next)
-})
-
 CardSchema.pre('save', function(next) {
 	if(this.isNew)
 		this.model('List').update({ _id: this.listId }, { $push: { cards: this._id } }, next)
 	else
 		next();
 });
+
+/*
+CardSchema.pre('remove', function(next) {
+	this.model('Activity').remove({ cardId: this._id }, next)
+})
 
 CardSchema.pre('save', function(next) {
 	
