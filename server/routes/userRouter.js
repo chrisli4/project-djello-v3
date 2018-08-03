@@ -4,14 +4,18 @@ const boardRouter = require('./boardRouter')
 const teamRouter = require('./teamRouter')
 
 const User = require('../models/user')
-const { boardsByUser, listsByUser, cardsByUser, teamCardsByUser } = require('../lib/byUser');
+const { boardsByUser, listsByUser, cardsByUser, teamByUser } = require('../lib/byUser');
 
-// get user
+function filt(user) {
+	return user.username
+}
+
+// get username
 router.get('/:username', function(req, res) {
 
-	User.find({ username: req.params.username })
-	.then(user =>
-		res.status(200).json(user)
+	User.findOne({ username: req.params.username })
+	.then(user => 
+		res.status(200).json(user.username)
 		)
 	.catch(e => 
 		res.status(500).json(e)
@@ -60,12 +64,13 @@ router.get('/:username/data', function(req, res) {
 
 	let username = req.params.username
 
-	Promise.all([boardsByUser(username), listsByUser(username), cardsByUser(username)])
+	Promise.all([boardsByUser(username), listsByUser(username), cardsByUser(username), teamByUser(username)])
 	.then(data =>
 		res.status(200).json({
 			boards: data[0],
 			lists: data[1],
-			cards: data[2]
+			cards: data[2],
+			team: data[3]
 		})
 		)
 	.catch(e =>

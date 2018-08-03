@@ -1,6 +1,7 @@
 const Board = require('../models/board')
 const List = require('../models/list')
 const Card = require('../models/card')
+const Team = require('../models/team')
 
 function boardsByUser(username) {
 	return Board.find({ userId: username })
@@ -50,8 +51,15 @@ function cardsByUser(username) {
 		)
 }
 
+function teamByUser(username) {
+	return Team.findOne({ userId: username })
+		.then(team => team)
+}
+
+
 module.exports = {
 	boardsByUser,
 	listsByUser,
 	cardsByUser,
+	teamByUser
 }
