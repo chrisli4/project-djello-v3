@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux'
 
-import { Button, Row } from 'mdbreact'
+import { Row } from 'mdbreact'
 
 import { boardUpdate, boardUpdateSubmit, boardDelete } from './actions';
 
@@ -79,8 +79,8 @@ class Board extends Component {
 				</Row>
 				<Row className='my-3 justify-content-end'>
 					<ListForm />
-					<Button color='primary' onClick={this.onUpdateSubmit}>Save</Button>
-					<Button color='danger' onClick={this.onDelete}>Delete Board</Button>
+					<button className='btn btn-primary' onClick={this.onUpdateSubmit}>Save</button>
+					<button className='btn btn-danger' onClick={this.onDelete}>Delete Board</button>
 				</Row>
 			</div>
 			)

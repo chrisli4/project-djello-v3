@@ -4,7 +4,7 @@ import { compose } from 'redux'
 
 import { cardUpdate, cardUpdateSubmit, cardDelete } from './actions';
 
-import { Button, Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal } from 'mdbreact'
+import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal } from 'mdbreact'
 
 import List from '../list'
 import ListForm from '../list/form'
@@ -91,8 +91,8 @@ class CustomCard extends Component {
 		</CardBody>
 		<CardFooter>
 		<Row className='justify-content-center'>
-					<Button onClick={this.onUpdateSubmit}>Save</Button>
-					<Button onClick={this.onDelete}>Delete</Button>
+					<button className='btn btn-primary' onClick={this.onUpdateSubmit}>Save</button>
+					<button className='btn btn-primary' onClick={this.onDelete}>Delete</button>
 					</Row>
 		</CardFooter>
 		</Modal>

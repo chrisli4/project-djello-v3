@@ -4,6 +4,7 @@ import DashboardSaga from './dashboard/sagas'
 import BoardSaga from './board/sagas'
 import ListSaga from './list/sagas'
 import CardSaga from './card/sagas'
+import TeamSaga from './team/sagas'
 
 export default function* IndexSaga() {
 	yield [
@@ -12,6 +13,7 @@ export default function* IndexSaga() {
 		DashboardSaga(),
 		BoardSaga(),
 		ListSaga(),
-		CardSaga()
+		CardSaga(),
+		TeamSaga(),
 	]
 }

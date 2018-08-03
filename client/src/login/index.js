@@ -28,6 +28,7 @@ class Login extends Component {
 								<label htmlFor="password" className="grey-text">Your password</label>
 								<Field name="password" component="input" type="password" className="form-control" />
 							</div>
+							<br/>
 							<div className="text-center mt-4">
 							<button type="submit" className="btn btn-indigo">Login</button>
 							</div>

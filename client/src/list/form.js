@@ -30,7 +30,7 @@ class ListForm extends React.Component {
     		<React.Fragment>
     			<Button color='primary' onClick={this.onToggle}>New List</Button>
     			<Modal isOpen={this.state.modalOpen} toggle={this.onToggle} size="lg">
-    				<CustomForm onSubmit={this.onSubmit} form='board'/>
+    				<CustomForm onSubmit={this.onSubmit} form='list'/>
     			</Modal>
     		</React.Fragment>
     	)

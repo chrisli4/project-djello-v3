@@ -1,20 +1,26 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal } from 'mdbreact'
+import { ModalHeader, ModalBody, ModalFooter } from 'mdbreact'
 
 let CustomForm = props => {
 	const { handleSubmit } = props
 	return (
 		<form onSubmit={handleSubmit}>
-			<div>
-				<label htmlFor="title">Title</label>
-				<Field name="title" component="input" type="text" />
-			</div>
-			<div>
-				<label htmlFor="description">Description</label>
-				<Field name="description" component="input" type="text" />
-			</div>
-				<button type="submit">Submit</button>
+			
+			<ModalHeader className='default-color white-text text-capitalize justify-content-center'>
+				<span>Create New {props.form}</span>
+			</ModalHeader>
+			<ModalBody>		
+				<label htmlFor="title" className="grey-text font-weight-light">Title</label>
+				<Field name="title" component="input" type="text" className='form-control'/>
+				<br/>			
+				<label htmlFor="description" className="grey-text font-weight-light">Description</label>
+				<Field name="description" component="input" type="text" className='form-control'/>
+				<br/>
+			</ModalBody>
+				<ModalFooter className='justify-content-center'>
+				<button className='btn btn-default' type="submit">Submit</button>
+				</ModalFooter>
 			</form>
 		)
 }

@@ -47,9 +47,9 @@ class CardForm extends React.Component {
 
     return (
     		<React.Fragment>
-    			<span onClick={this.onToggle} onMouseEnter={this.onHover} onMouseLeave={this.onLeave} className={names}>New List</span>
+    			<span onClick={this.onToggle} onMouseEnter={this.onHover} onMouseLeave={this.onLeave} className={names}>Add Card</span>
     			<Modal isOpen={this.state.modalOpen} toggle={this.onToggle} size="lg">
-    				<CustomForm onSubmit={this.onSubmit} form='board'/>
+    				<CustomForm onSubmit={this.onSubmit} form='card'/>
     			</Modal>
     		</React.Fragment>
     	)

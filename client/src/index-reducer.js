@@ -8,6 +8,7 @@ import dashboard from './dashboard/reducer'
 import boards from './board/reducer';
 import lists from './list/reducer';
 import cards from './card/reducer';
+import team from './team/reducer'
 import { reducer as formReducer } from 'redux-form'
 
 const initialState = {
@@ -23,6 +24,7 @@ const IndexReducer = combineReducers({
 	boards,
 	lists,
 	cards,
+	team,
 	router: routerReducer, 
 	form: formReducer
 })

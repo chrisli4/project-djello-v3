@@ -47,3 +47,17 @@ export const deleteByArr = function(state, propKey, arr) {
 		return acc
 	}, {});
 }
+
+export const isEmpty = function(obj) {
+	if(Object.keys(obj).length === 0 && obj.constructor === Object) {
+		return {
+			'i': {
+				_id: '',
+				title: '',
+				description: '',
+				lists: [],
+			}
+		}
+	} else
+		return obj
+}

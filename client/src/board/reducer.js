@@ -15,7 +15,7 @@ import {
 import { DATA_REQUEST_SUCCESS } from '../dashboard/constants'
 import { LIST_CREATE_SUCCESS, LIST_DELETE_SUCCESS } from '../list/constants'
 
-import { deleteByObj, deleteById } from '../lib/reducers'
+import { deleteByObj, deleteById, isEmpty } from '../lib/reducers'
 
 const initialState = {
 	current: 'i',
@@ -171,8 +171,8 @@ const reducer = function(state = initialState, action) {
 		case DATA_REQUEST_SUCCESS: 
 		return {
 			...state,
-			current: Object.keys(action.data.boards)[0],
-			byId: action.data.boards
+			current: Object.keys(action.data.boards)[0] || 'i',
+			byId: isEmpty(action.data.boards)
 		}
 
 		case LIST_CREATE_SUCCESS:
