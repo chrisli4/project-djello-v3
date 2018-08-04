@@ -27,7 +27,7 @@ mongooseeder.seed({
         _id: `bar${ i }`,
         boardId: `foo${ genRan }`,
         title: faker.commerce.productName(),
-        description: faker.lorem.sentence(),
+        description: faker.company.catchPhrase(),
       })
     lists.push(list);
     }

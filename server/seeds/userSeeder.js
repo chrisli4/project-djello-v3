@@ -18,7 +18,7 @@ mongooseeder.seed({
 
   	console.log('Creating Users');
   	var users = [];
-  	for (let i = 1; i < 6; i++) {
+  	for (let i = 1; i < 4; i++) {
   		var user = new User({
         _id: shortid.generate(),
         username: `test${ i }`,

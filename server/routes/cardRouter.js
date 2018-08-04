@@ -29,6 +29,7 @@ router.post('/', function(req, res) {
 
 	let card = new Card({
 		_id: shortid.generate(),
+		userId: input.userId,
 		listId: input.listId,
 		title: input.title,
 		description: input.description
@@ -63,7 +64,6 @@ router.put('/:cardId', function(req, res) {
 		res.status(500).json(e)
 		)
 })
-
 
 // delete card
 router.delete('/:cardId', function(req, res) {

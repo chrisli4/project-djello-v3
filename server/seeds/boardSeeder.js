@@ -23,8 +23,8 @@ mongooseeder.seed({
       var board = new Board({
         _id: `foo${ i }`,
         userId: 'test1',
-        title: faker.name.title(),
-        description: faker.name.jobDescriptor(),
+        title: faker.company.companyName(),
+        description: faker.company.catchPhrase(),
       })
     boards.push(board);
     }

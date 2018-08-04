@@ -12,7 +12,7 @@ const TeamSchema = new Schema({
 		unique: true
 	},
 	team: [{ type: String, ref: 'User' }],
-	teamSent: [{ type: String, ref: 'User' }],
+	teamSend: [{ type: String, ref: 'User' }],
 	teamReceived: [{ type: String, ref: 'User' }],
 	cards: [{ type: String, ref: 'Card' }],
 },

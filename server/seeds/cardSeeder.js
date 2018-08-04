@@ -25,9 +25,10 @@ mongooseeder.seed({
 
       var card = new Card({
         _id: `foobar${ i }`,
+        userId: `test1`,
         listId: `bar${ genRan }`,
         title: faker.name.title(),
-        description: faker.lorem.words(),
+        description: faker.company.bs(),
       })
 
     cards.push(card);
