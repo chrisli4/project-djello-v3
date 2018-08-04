@@ -18,15 +18,11 @@ import { TEAM_SEND, TEAM_SEND_CANCEL, TEAM_ACCEPT, TEAM_DECLINE } from './consta
 
 function* teamSendFlow(action) {
 	try {
-		console.log(user, userToSend)
 		const { user, userToSend } = action
+		console.log(user, userToSend)
 		const URL = `http://localhost:3001/users/${user.username}/team/send`
-		const found = yield call(fetchAPI, URL, makeOptions('POST', user, { receiveId: userToSend }))
-		
-		if(found)
-			yield put(teamSendSuccess(found))
-		else
-			yield put(teamSendNotFound)
+		const found = yield call(fetchAPI, URL, makeOptions('POST', user, { userB: userToSend }))
+		yield put(teamSendSuccess(found))
 	} catch(e) {
 		yield put(teamSendError(e))
 	}
@@ -35,8 +31,8 @@ function* teamSendFlow(action) {
 function* teamSendCancelFlow(action) {
 	try {
 		const { user, userToCancel } = action
-		const URL = `http://localhost:3001/users/team/cancel`
-		const found = yield call(fetchAPI, URL, makeOptions('POST', user, { receiveId: userToCancel }))
+		const URL = `http://localhost:3001/users/${user.username}/team/cancel`
+		const found = yield call(fetchAPI, URL, makeOptions('POST', user, { userB: userToCancel }))
 		yield put(teamSendSuccess(found))
 	} catch(e) {
 		yield put(teamSendError(e))
@@ -46,8 +42,8 @@ function* teamSendCancelFlow(action) {
 function* teamAcceptFlow(action) {
 	try {
 		const { user, userToAccept } = action
-		const URL = `http://localhost:3001/users/team/accept`
-		const accept = yield call(fetchAPI, URL, makeOptions('POST', user, { sendId: userToAccept }))
+		const URL = `http://localhost:3001/users/${user.username}/team/accept`
+		const accept = yield call(fetchAPI, URL, makeOptions('POST', user, { userB: userToAccept }))
 		yield put(teamAcceptSuccess(accept))
 	} catch(e) {
 		yield put(teamAcceptError(e))
@@ -57,8 +53,8 @@ function* teamAcceptFlow(action) {
 function* teamDeclineFlow(action) {
 	try {
 		const { user, userToDecline } = action
-		const URL = `http://localhost:3001/users/team/decline`
-		const decline = yield call(fetchAPI, URL, makeOptions('POST', user, { sendId: userToDecline }))
+		const URL = `http://localhost:3001/users/${user.username}/team/decline`
+		const decline = yield call(fetchAPI, URL, makeOptions('POST', user, { userB: userToDecline }))
 		yield put(teamDeclineSuccess(decline))
 	} catch(e) {
 		yield put(teamDeclineError(e))

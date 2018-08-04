@@ -22,7 +22,7 @@ const initialState = {
 	userId: '',
 	found: '',
 	team: [],
-	teamSent: [],
+	teamSend: [],
 	teamReceived: [],
 	cards: [],
 	requesting: false,
@@ -30,6 +30,19 @@ const initialState = {
 	messages: [],
 	errors: [],
 }
+
+function isEmpty(state, action, func) {
+	if(action === null) {
+		return [...state] 
+	}
+	else
+		return func(state, action)
+}
+
+function concat(state, action) {
+	return [...state, action]
+}
+
 
 const reducer = function(state = initialState, action) {
 	switch(action.type) {
@@ -58,7 +71,7 @@ const reducer = function(state = initialState, action) {
 				found: true,
 				requesting: false,
 				successful: true,
-				teamSent: [ ...state.teamSent, action.user ]
+				teamSend: isEmpty(state.teamSend, action.user, concat)
 			}
 
 		case TEAM_SEND_NOT_FOUND:
@@ -88,7 +101,7 @@ const reducer = function(state = initialState, action) {
 		case TEAM_SEND_CANCEL_SUCCESS:
 			return {
 				...state,
-				teamSent: deleteById(state.teamSent, action.user),
+				teamSend: isEmpty(state.teamSend, action.user, deleteById),
 				requesting: false,
 				successful: true,
 			}
@@ -118,7 +131,8 @@ const reducer = function(state = initialState, action) {
 		case TEAM_ACCEPT_SUCCESS:
 			return {
 				...state,
-				team: [ ...state.team, action.user ],
+				team: isEmpty(state.team, action.user, concat),
+				teamReceived: deleteById(state.teamReceived, action.user),
 				requesting: false,
 				successful: true,
 			}
@@ -148,7 +162,7 @@ const reducer = function(state = initialState, action) {
 		case TEAM_DECLINE_SUCCESS:
 			return {
 				...state,
-				teamReceived: deleteById(state.teamReceived, action.user),
+				teamReceived: isEmpty(state.teamReceived, action.user, deleteById),
 				requesting: false,
 				successful: true,
 			}

@@ -33,7 +33,7 @@ class CardForm extends React.Component {
   }
 
   onSubmit = (values) => {
-  	this.props.cardCreate(this.props.user, { listId: this.props._id, ...values })
+  	this.props.cardCreate(this.props.user, { userId: this.props.user.username, listId: this.props._id, ...values })
   	this.setState({
   		modalOpen: false
   	})
