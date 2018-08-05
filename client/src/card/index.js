@@ -87,12 +87,17 @@ class CustomCard extends Component {
 					<hr/>
 					<div>
 					<label>Members</label>
+						<select>
+							{ this.props.team.team.map(member => (
+								<option>{ member }</option>
+							))}
+						</select>
 					</div>
 		</CardBody>
 		<CardFooter>
 		<Row className='justify-content-center'>
-					<button className='btn btn-primary' onClick={this.onUpdateSubmit}>Save</button>
-					<button className='btn btn-primary' onClick={this.onDelete}>Delete</button>
+					<button className='btn btn-primary' onClick={this.onUpdateSubmit}>Save Card</button>
+					<button className='btn btn-danger' onClick={this.onDelete}>Delete Card</button>
 					</Row>
 		</CardFooter>
 		</Modal>
@@ -103,7 +108,8 @@ class CustomCard extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
 	card: state.cards.byId[ownProps._id],
-	user: state.user
+	user: state.user,
+	team: state.team
 })
 
 

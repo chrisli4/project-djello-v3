@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import { Container, CardHeader, Card, CardBody, FormInline } from 'mdbreact'
+import { Container, CardHeader, Card, CardBody, FormInline, Row } from 'mdbreact'
 import { Field, reduxForm } from 'redux-form'
 
 class Profile extends Component {
 
 	render() {
 		return (
-			<Container className='mt-3'>
-				<Card className='mx-auto' style={{maxWidth:"450px"}}>
+			<Container className='mt-5'>
+
+				<Card className='mx-auto mt-2' style={{maxWidth:"450px"}}>
 					<CardHeader border="default" color="default-color" className='text-center'>
 						<h3 className='py-1'>Profile</h3>
 					</CardHeader>

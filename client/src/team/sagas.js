@@ -7,14 +7,18 @@ import {
 	teamSendSuccess,
 	teamSendNotFound, 
 	teamSendError, 
+	teamSendCancelSuccess,
+	teamSendCancelError,
 	teamAcceptSuccess, 
 	teamAcceptError, 
 	teamDeclineSuccess, 
-	teamDeclineError
+	teamDeclineError,
+	teamRemoveSuccess,
+	teamRemoveError
 } from './actions'
 
 
-import { TEAM_SEND, TEAM_SEND_CANCEL, TEAM_ACCEPT, TEAM_DECLINE } from './constants'
+import { TEAM_SEND, TEAM_SEND_CANCEL, TEAM_ACCEPT, TEAM_DECLINE, TEAM_REMOVE } from './constants'
 
 function* teamSendFlow(action) {
 	try {
@@ -33,9 +37,9 @@ function* teamSendCancelFlow(action) {
 		const { user, userToCancel } = action
 		const URL = `http://localhost:3001/users/${user.username}/team/cancel`
 		const found = yield call(fetchAPI, URL, makeOptions('POST', user, { userB: userToCancel }))
-		yield put(teamSendSuccess(found))
+		yield put(teamSendCancelSuccess(found))
 	} catch(e) {
-		yield put(teamSendError(e))
+		yield put(teamSendCancelError(e))
 	}
 }
 
@@ -61,12 +65,24 @@ function* teamDeclineFlow(action) {
 	}
 }
 
+function* teamRemoveFlow(action) {
+	try {
+		const { user, userToRemove } = action
+		const URL = `http://localhost:3001/users/${user.username}/team/remove`
+		const removed = yield call(fetchAPI, URL, makeOptions('POST', user, { userB: userToRemove }))
+		yield put(teamRemoveSuccess(removed))
+	} catch(e) {
+		yield put(teamRemoveError(e))
+	}
+}
+
 function* teamWatcher() {
 	yield [
 		takeLatest(TEAM_SEND, teamSendFlow),
 		takeLatest(TEAM_SEND_CANCEL, teamSendCancelFlow),
 		takeLatest(TEAM_ACCEPT, teamAcceptFlow),
-		takeLatest(TEAM_DECLINE, teamDeclineFlow)
+		takeLatest(TEAM_DECLINE, teamDeclineFlow),
+		takeLatest(TEAM_REMOVE, teamRemoveFlow)
 	]
 }
 

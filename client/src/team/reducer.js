@@ -11,7 +11,10 @@ import {
 	TEAM_ACCEPT_ERROR,
 	TEAM_DECLINE,
 	TEAM_DECLINE_SUCCESS,
-	TEAM_DECLINE_ERROR
+	TEAM_DECLINE_ERROR,
+	TEAM_REMOVE,
+	TEAM_REMOVE_SUCCESS,
+	TEAM_REMOVE_ERROR
 } from './constants'
 
 import { DATA_REQUEST_SUCCESS } from '../dashboard/constants'
@@ -24,7 +27,6 @@ const initialState = {
 	team: [],
 	teamSend: [],
 	teamReceived: [],
-	cards: [],
 	requesting: false,
 	successful: false,
 	messages: [],
@@ -132,6 +134,7 @@ const reducer = function(state = initialState, action) {
 			return {
 				...state,
 				team: isEmpty(state.team, action.user, concat),
+				teamSend: deleteById(state.teamSend, action.user),
 				teamReceived: deleteById(state.teamReceived, action.user),
 				requesting: false,
 				successful: true,
@@ -178,6 +181,35 @@ const reducer = function(state = initialState, action) {
 				}])
 			}
 
+		case TEAM_REMOVE:
+			return {
+				...state,
+				requesting: true,
+				successful: false,
+				messages: [{
+					body: `removing ${action.userToRemove} from team...`,
+					time: Date.now()
+				}],
+			}
+
+		case TEAM_REMOVE_SUCCESS:
+			return {
+				...state,
+				teamReceived: isEmpty(state.team, action.user, deleteById),
+				requesting: false,
+				successful: true,
+			}
+
+		case TEAM_REMOVE_ERROR:
+			return {
+				...state,
+				requesting: false,
+				successful: false,
+				errors: state.errors.concat([{
+					body: action.error.toString(),
+					time: Date.now(),
+				}])
+			}
 
 		default:
 			return state

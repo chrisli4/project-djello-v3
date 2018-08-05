@@ -11,7 +11,10 @@ import {
 	TEAM_ACCEPT_ERROR,
 	TEAM_DECLINE,
 	TEAM_DECLINE_SUCCESS,
-	TEAM_DECLINE_ERROR
+	TEAM_DECLINE_ERROR,
+	TEAM_REMOVE,
+	TEAM_REMOVE_SUCCESS,
+	TEAM_REMOVE_ERROR
 } from './constants'
 
 import makeActionCreator from '../makeActionCreator'
@@ -32,3 +35,7 @@ export const teamAcceptError 		= makeActionCreator(TEAM_ACCEPT_ERROR, 'error')
 export const teamDecline 			= makeActionCreator(TEAM_DECLINE, 'user', 'userToDecline')
 export const teamDeclineSuccess 	= makeActionCreator(TEAM_DECLINE_SUCCESS, 'user')
 export const teamDeclineError 		= makeActionCreator(TEAM_DECLINE_ERROR, 'error')
+
+export const teamRemove 			= makeActionCreator(TEAM_REMOVE, 'user', 'userToRemove')
+export const teamRemoveSuccess 		= makeActionCreator(TEAM_REMOVE_SUCCESS, 'user')
+export const teamRemoveError 		= makeActionCreator(TEAM_REMOVE_ERROR, 'error')
