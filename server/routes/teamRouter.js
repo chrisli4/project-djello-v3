@@ -20,6 +20,16 @@ router.post('/', function(req, res) {
 		)
 })
 
+function inUser(userB) {
+	return User.findOne({ username: userB })
+				.then(user => {
+					if(user) {
+						return true
+					} else
+						return false
+					})
+}
+
 function inTeam(userA, userB) {
 	return Team.findOne({ userId: userA })
 				.then(team =>
@@ -59,9 +69,9 @@ function accept(userA, userB) {
 
 function cancel(userA, userB) {
 	return Team.findOneAndUpdate({ userId: userA }, { $pull: { teamSend: userB }})
-				.then(() => (
+				.then(() => 
 					Team.findOneAndUpdate({ userId: userB }, { $pull: { teamReceived: userA } })
-					))
+					)
 }
 
 function decline(userA, userB) {
@@ -81,13 +91,10 @@ router.post('/remove', function(req, res) {
 	inTeam(userA, userB)
 		.then(team => {
 			if(team) {
-				remove(userA, userB)
+				Promise.all([remove(userA, userB), remove(userB, userA)])
 					.then(() =>
-						remove(userB, userA)
+						res.status(200).json(userB)
 							)
-							.then(() =>
-								res.status(200).json(userB)
-								)
 							.catch(e =>
 								res.status(500).json(e.stack)
 								)
@@ -120,37 +127,29 @@ router.post('/accept', function(req, res) {
 			})
 })
 
-
 // send team invite
 router.post('/send', function(req, res) {
 
 	const userA = req.body.user.username
 	const userB = req.body.userB
 
-	inTeam(userA, userB)
-		.then(team => {
-			if(!team && (userA !== userB) ) {
-				inSend(userA, userB)
-					.then(snd => {
-						if(!snd) {
-						send(userA, userB)
-							.then(() =>
-								receive(userA, userB)
-								)
-								.then(() =>
-									res.status(200).json(userB)
-									)
-						} else
-							res.status(200).json(null)
-					})
-			}
-			else
-				res.status(200).json(null)
-		})
-		.catch(e =>
-			res.status(500).json(e.stack)
-			)	
+//check that userB is not in team, not in sent, user exists, and userB is not self
+
+	Promise.all([inTeam(userA, userB), inSend(userA, userB), inUser(userB)])
+			.then(([t, s, u]) => {
+				if(!t && !s && u && (userA !== userB)) {
+					Promise.all([send(userA, userB), receive(userA, userB)])
+						.then(() =>
+							res.status(200).json(userB)
+							)
+				} else
+					res.status(200).json(null)
+			})
+			.catch(e =>
+				res.status(500).json(e.stack)
+				)
 })
+
 
 // cancel team request
 router.post('/cancel', function(req, res) {
@@ -158,19 +157,20 @@ router.post('/cancel', function(req, res) {
 	const userA = req.body.user.username
 	const userB = req.body.userB
 
+//check invite was sent to userB
 	inSend(userA, userB)
-		.then(snd => {
-			if(snd) {
+		.then(s => {
+			if(s) {
 				cancel(userA, userB)
 					.then(() =>
 						res.status(200).json(userB)
 						)
-					.catch(e => 
-						res.status(500).json(e.stack)
-						)
 			} else 
 				res.status(200).json(null)
 		})
+		.catch(e => 
+			res.status(500).json(e.stack)
+			)
 })
 
 // decline team invite
@@ -180,8 +180,8 @@ router.post('/decline', function(req, res) {
 	const userB = req.body.userB
 
 	inReceived(userA, userB)
-		.then(receive => {
-			if(receive) {
+		.then(r => {
+			if(r) {
 				decline(userA, userB)
 					.then(() =>
 						declined(userA, userB)

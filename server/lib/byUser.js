@@ -49,6 +49,9 @@ function cardsByUser(username) {
 
 		}, {})
 		)
+	.catch(e =>
+		res.status(500).json(e.stack)
+		)
 }
 
 function teamByUser(username) {
@@ -56,10 +59,21 @@ function teamByUser(username) {
 		.then(team => team)
 }
 
+function teamCardsByUser(username) {
+	return Card.find({ members: username })
+		.then(cards => 
+			cards.reduce((acc, card) => {
+				acc[card._id] = card;
+				return acc
+			}, {})
+		)
+}
+
 
 module.exports = {
 	boardsByUser,
 	listsByUser,
 	cardsByUser,
-	teamByUser
+	teamByUser,
+	teamCardsByUser
 }

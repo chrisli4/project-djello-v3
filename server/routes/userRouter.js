@@ -4,7 +4,7 @@ const boardRouter = require('./boardRouter')
 const teamRouter = require('./teamRouter')
 
 const User = require('../models/user')
-const { boardsByUser, listsByUser, cardsByUser, teamByUser } = require('../lib/byUser');
+const { boardsByUser, listsByUser, cardsByUser, teamByUser, teamCardsByUser } = require('../lib/byUser');
 
 function filt(user) {
 	return user.username
@@ -64,13 +64,13 @@ router.get('/:username/data', function(req, res) {
 
 	let username = req.params.username
 
-	Promise.all([boardsByUser(username), listsByUser(username), cardsByUser(username), teamByUser(username)])
-	.then(data =>
+	Promise.all([boardsByUser(username), listsByUser(username), cardsByUser(username), teamByUser(username), teamCardsByUser(username)])
+	.then(([boards, lists, cards, team, teamCards]) =>
 		res.status(200).json({
-			boards: data[0],
-			lists: data[1],
-			cards: data[2],
-			team: data[3]
+			boards: boards,
+			lists: lists,
+			cards: Object.assign(cards, teamCards),
+			team: team
 		})
 		)
 	.catch(e =>

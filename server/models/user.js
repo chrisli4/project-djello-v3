@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 const Card = require('./card');
+const Team = require('./team');
 
 const UserSchema = new Schema({
 	_id: {
@@ -60,5 +61,12 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
 		cb(null, isMatch)
 	});
 }
+
+UserSchema.pre('save', function(next) {
+	if(this.isNew)
+		this.model('Team').create({ userId: this.username }, next)
+	else
+		next();
+});
 
 module.exports = mongoose.model('User', UserSchema);

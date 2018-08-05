@@ -13,8 +13,7 @@ const TeamSchema = new Schema({
 	},
 	team: [{ type: String, ref: 'User' }],
 	teamSend: [{ type: String, ref: 'User' }],
-	teamReceived: [{ type: String, ref: 'User' }],
-	cards: [{ type: String, ref: 'Card' }],
+	teamReceived: [{ type: String, ref: 'User' }]
 },
 {
 	timestamps: true

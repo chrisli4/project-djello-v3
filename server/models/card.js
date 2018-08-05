@@ -31,13 +31,8 @@ const CardSchema = new Schema({
 	},
 	members: {
 		type: Array,
-		default: [],
-		set: function(members) {
-			this._previousMembers = this.members;
-			return members
-		}
-	},
-	_previousMembers: []
+		default: []
+	}
 })
 
 CardSchema.pre('remove', function(next) {
