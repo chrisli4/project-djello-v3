@@ -34,6 +34,22 @@ mongooseeder.seed({
     cards.push(card);
     }
 
+    for(let i = 132; i < 142; i++) {
+
+      let genRan = getRandomInt(40, 50);
+
+      var card = new Card({
+        _id: `foobar${ i }`,
+        userId: `test2`,
+        listId: `bar${ genRan }`,
+        title: faker.name.title(),
+        description: faker.company.bs(),
+        members: ['test1']
+      })
+
+    cards.push(card);
+    }
+
     console.log('Saving...');
     var promises = [];
     [

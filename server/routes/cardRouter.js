@@ -49,6 +49,7 @@ router.post('/', function(req, res) {
 router.put('/:cardId', function(req, res) {
 	
 	let input = req.body.card
+	var socket = req.app.get('socketIo');
 
 	Card.findOne({ _id: input._id })
 	.then(card =>
@@ -57,9 +58,10 @@ router.put('/:cardId', function(req, res) {
 	.then(card => 
 		card.save()
 		)
-	.then(updated =>
+	.then(updated => {
+		socket.emit('CARD_UPDATE', updated)
 		res.status(200).json(updated)
-		)
+		})
 	.catch(e => 
 		res.status(500).json(e)
 		)

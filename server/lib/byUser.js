@@ -30,24 +30,12 @@ function listsByUser(username) {
 }
 
 function cardsByUser(username) {
-	return Board.find({ userId: username })
-	.populate({
-		path: 'lists',
-		populate: {
-			path: 'cards'
-		}
-	})
-	.then(boards => 
-		boards.reduce((acc, curr) => {
-			curr.lists.forEach(list => 
-				list.cards.forEach(card => 
-					acc[card._id] = card
-					)
-				)
-
-			return acc;
-
-		}, {})
+	return Card.find({ userId: username })
+		.then(cards => 
+			cards.reduce((acc, card) => {
+				acc[card._id] = card;
+				return acc
+			}, {})
 		)
 	.catch(e =>
 		res.status(500).json(e.stack)
@@ -67,6 +55,9 @@ function teamCardsByUser(username) {
 				return acc
 			}, {})
 		)
+		.catch(e =>
+			res.status(500).json(e.stack)
+			)
 }
 
 
