@@ -45,7 +45,7 @@ class CustomNavbar extends React.Component {
 								<NavLink to="/home/team"><FontAwesomeIcon icon="users" className='mr-2'/>Team</NavLink>
 							</NavItem>
 							<NavItem className={navItem}>
-								<NavLink to="#"><FontAwesomeIcon icon="chalkboard" className='mr-2'/>Cards</NavLink>
+								<NavLink to="/home/teamcards"><FontAwesomeIcon icon="chalkboard" className='mr-2'/>Cards</NavLink>
 							</NavItem>
 							<NavItem onClick={this.props.userUnset}>
 								<div className='nav-link'><FontAwesomeIcon icon="sign-out-alt" className='mr-2'/>Sign out</div>

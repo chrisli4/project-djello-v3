@@ -9,13 +9,16 @@ import {
 	CARD_DELETE,
 	CARD_DELETE_SUCCESS,
 	CARD_DELETE_ERROR,
+	CARD_ADD_MEMBER,
+	CARD_DELETE_MEMBER,
+	CARD_RECEIVE_UPDATE
 } from './constants'
 
 import { DATA_REQUEST_SUCCESS } from '../dashboard/constants'
 import { BOARD_DELETE_SUCCESS } from '../board/constants'
 import { LIST_DELETE_SUCCESS } from '../list/constants'
 
-import { deleteByObj, deleteByProp } from '../lib/reducers'
+import { deleteByObj, deleteByProp, deleteById } from '../lib/reducers'
 
 const initialState = {
 	byId: {},
@@ -116,6 +119,15 @@ const reducer = function(state = initialState, action) {
 				}])
 			}
 
+		case CARD_RECEIVE_UPDATE:
+			return {
+				...state,
+				byId: {
+					...state.byId,
+					[action.card._id]: action.card
+				}
+			}
+
 		case CARD_DELETE: 
 			return {
 				...state,
@@ -151,6 +163,30 @@ const reducer = function(state = initialState, action) {
 					body: action.error.toString(),
 					time: Date.now(),
 				}])
+			}
+
+		case CARD_ADD_MEMBER:
+			return {
+				...state,
+				byId: {
+					...state.byId,
+					[action.card._id]: {
+						...state.byId[action.card._id],
+						members: [...state.byId[action.card._id].members, action.member]
+					}
+				}
+			}
+
+		case CARD_DELETE_MEMBER:
+			return {
+				...state,
+				byId: {
+					...state.byId,
+					[action.card._id]: {
+						...state.byId[action.card._id],
+						members: deleteById(state.byId[action.card._id].members, action.member)
+					}
+				}
 			}
 
 		case DATA_REQUEST_SUCCESS: 

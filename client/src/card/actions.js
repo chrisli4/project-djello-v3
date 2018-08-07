@@ -9,6 +9,9 @@ import {
 	CARD_DELETE,
 	CARD_DELETE_SUCCESS,
 	CARD_DELETE_ERROR,
+	CARD_ADD_MEMBER,
+	CARD_DELETE_MEMBER,
+	CARD_RECEIVE_UPDATE
 } from './constants'
 
 import makeActionCreator from '../makeActionCreator'
@@ -22,6 +25,11 @@ export const cardUpdateSubmit	= makeActionCreator(CARD_UPDATE_SUBMIT, 'user', 'c
 export const cardUpdateSuccess = makeActionCreator(CARD_UPDATE_SUCCESS, 'card')
 export const cardUpdateError 	= makeActionCreator(CARD_UPDATE_ERROR, 'error')
 
+export const cardReceiveUpdate = makeActionCreator(CARD_RECEIVE_UPDATE, 'card')
+
 export const cardDelete 		= makeActionCreator(CARD_DELETE, 'user', 'card')
 export const cardDeleteSuccess = makeActionCreator(CARD_DELETE_SUCCESS, 'card')
 export const cardDeleteError 	= makeActionCreator(CARD_DELETE_ERROR, 'error')
+
+export const cardAddMember		= makeActionCreator(CARD_ADD_MEMBER, 'card', 'member')
+export const cardDeleteMember	= makeActionCreator(CARD_DELETE_MEMBER, 'card', 'member')

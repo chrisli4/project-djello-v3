@@ -5,6 +5,8 @@ import Navbar from './components/navbar'
 import Dashboard from './dashboard'
 import Profile from './profile'
 import Team from './team'
+import TeamCards from './card/teamcards'
+
 
 class Main extends Component {
 	render() {
@@ -14,6 +16,7 @@ class Main extends Component {
 				<div className='mt-3 pt-3'>
 					<Switch>
 						<Route path='/home/profile' component={Profile} />
+						<Route path='/home/teamcards' component={TeamCards} />
 						<Route path='/home/team' component={Team} />
 						<Route path='/home' component={Dashboard} />
 					</Switch>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Container } from 'mdbreact'
 
-class teamIndex extends Component {
+class TeamCards extends Component {
 
 	componentDidMount() {
 
@@ -8,15 +10,18 @@ class teamIndex extends Component {
 
 	render() {
 		return (
-			<div>
-			</div>
+			<Container>
+				{ this.props.teamCards.map(card =>
+					<div>{card.title}</div>
+					)}
+			</Container>
 			)
 	}
 }
 
 function notOwn(cards, username) {
 
-	const arr = [];
+	let arr = [];
 
 	for(let id in cards) {
 		if(cards[id].userId !== username) {
@@ -29,4 +34,6 @@ function notOwn(cards, username) {
 const mapStateToProps = (state) => ({
 	teamCards: notOwn(state.cards.byId, state.user.username)
 })
+
+export default connect(mapStateToProps)(TeamCards)
 

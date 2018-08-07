@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { dataRequest } from '../dashboard/actions'
 import { userSet } from '../user/actions'
 import { teamSend, teamSendCancel, teamAccept, teamDecline, teamRemove } from './actions'
-import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Col } from 'mdbreact'
+import { Card, CardHeader, CardBody, CardFooter, CardImage, CardTitle, CardText, Button, ListGroup, ListGroupItem, Row, Col } from 'mdbreact'
 
 class Team extends Component {
 
@@ -131,11 +131,9 @@ class Team extends Component {
 					</Col>
 
 				</Row>
-
 			</Container>
 			)
 	}
-
 }
 
 const mapStateToProps = (state) => ({
