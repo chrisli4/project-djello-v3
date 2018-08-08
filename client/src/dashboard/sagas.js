@@ -1,5 +1,4 @@
 import { 
-	dataRequest, 
 	dataRequestSuccess, 
 	dataRequestError 
 } from './actions'

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux'
 
-import { Row } from 'mdbreact'
+import { Container, Row } from 'mdbreact'
 
 import { boardUpdate, boardUpdateSubmit, boardDelete } from './actions';
 
+import BoardDropdown from './dropdown'
+import BoardForm from './form'
 import List from '../list'
 import ListForm from '../list/form'
 
@@ -57,6 +58,12 @@ class Board extends Component {
 
 	render() {
 		return (
+				<Container>
+				<Row className='justify-content-end'>
+					<BoardDropdown />
+					<BoardForm />
+				</Row>
+				
 			<div>
 				<Row>
 					<div onDoubleClick={this.onDisableTitle} className='col text-left my-1'>
@@ -83,6 +90,7 @@ class Board extends Component {
 					<button className='btn btn-danger' onClick={this.onDelete}>Delete Board</button>
 				</Row>
 			</div>
+			</Container>
 			)
 	}
 }

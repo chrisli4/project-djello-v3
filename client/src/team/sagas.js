@@ -1,11 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { handleApiErrors } from '../lib/api-errors';
 import { fetchAPI, makeOptions } from '../lib/api'
 
 
 import {
 	teamSendSuccess,
-	teamSendNotFound, 
 	teamSendError, 
 	teamSendCancelSuccess,
 	teamSendCancelError,

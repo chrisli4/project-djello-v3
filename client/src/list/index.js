@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { listUpdate, listUpdateSubmit, listDelete } from './actions';
 import { cardCreate } from '../card/actions';
 
-import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row } from 'mdbreact'
+import { Card, CardHeader, CardBody, CardFooter, ListGroup, Row } from 'mdbreact'
 
 import CustomCard from '../card'
 import CardForm from '../card/form'
@@ -73,7 +72,7 @@ class List extends Component {
 				
 				<ListGroup>
 					{ this.props.list.cards.map(cardId =>
-						<CustomCard key={cardId} _id={cardId} />
+						<CustomCard key={cardId} _id={cardId} listTitle={this.props.list.title}/>
 						)}
 				</ListGroup>
 				</CardBody>

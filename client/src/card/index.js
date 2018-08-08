@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux'
-import io from "socket.io-client";
+import classNames from 'classnames'
 
 import { cardUpdate, cardUpdateSubmit, cardDelete, cardAddMember, cardDeleteMember, cardReceiveUpdate } from './actions';
 
-import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal, FormInline } from 'mdbreact'
+import { CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal, FormInline } from 'mdbreact'
 
-import List from '../list'
-import ListForm from '../list/form'
 
 class CustomCard extends Component {
 
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			disableTitle: true,
 			disableDescr: true,
 			modalOpen: false,
-			member: '', 
+			member: '',
+			completed: this.props.card.completed
 		}
 	}
 
@@ -82,9 +80,24 @@ class CustomCard extends Component {
 		this.props.cardDeleteMember(this.props.card, member)
 	}
 
+	onComplete = (e) => {
+		e.preventDefault()
+		this.props.cardUpdate(this.props.card, 'completed', !this.state.completed)
+		this.setState({
+			completed: !this.state.completed
+		})
+	}
+
 
 
 	render() {
+
+		let comp = classNames('btn btn-sm', {
+			'btn-success': this.state.completed,
+			'btn-danger': !this.state.completed
+		})
+
+
 		return (
 		<React.Fragment>
 		<ListGroupItem hover className="text-center" onClick={this.onToggle}>
@@ -101,15 +114,14 @@ class CustomCard extends Component {
 		<CardBody>
 
 			<div className="d-flex justify-content-between">
-						<label>In List: {this.props.card.title}</label>
+						<label>In List: {this.props.listTitle}</label>
+						<button className={comp} onClick={this.onComplete} name='completed' value={this.state.completed}>{this.state.completed ? 'completed' : 'incomplete' }</button>
 					</div>
 					<hr/>
 					<label>Description</label>
 					<div onDoubleClick={this.onDisableDescr}>
 						<input onChange={this.onUpdate} disabled={this.state.disableDescr} name='description' value={this.props.card.description} rows="3" spellCheck="false" className="form-control-plaintext py-3 px-2 mb-3"/>
 					</div>
-					<hr/>
-					<label>Tasks</label>
 					<hr/>
 					<label>Members</label>
 						<ListGroup>
@@ -130,7 +142,7 @@ class CustomCard extends Component {
 					<option key={member} value={member}>{member}</option>
 				))}
 			</select>
-			<button className='btn btn-default' size="sm" onClick={this.onAddMember}>Add User</button>
+			<button className='btn btn-default btn-sm' size="sm" onClick={this.onAddMember}>Add User</button>
 		</FormInline>
 					</div>
 		</CardBody>

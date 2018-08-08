@@ -1,7 +1,6 @@
 import {
 	listCreateSuccess,
 	listCreateError,
-	listUpdateSubmit,
 	listUpdateSuccess,
 	listUpdateError,
 	listDeleteSuccess,
@@ -30,7 +29,7 @@ function* listUpdateFlow(action) {
 		const updated = yield call(fetchAPI, URL, makeOptions('PUT', user, { list: list }))
 		yield put(listUpdateSuccess(updated))
 	} catch(e) {
-		yield put(listCreateError(e))
+		yield put(listUpdateError(e))
 	}
 }
 

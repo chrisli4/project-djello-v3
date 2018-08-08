@@ -14,12 +14,16 @@ import {
 	TEAM_DECLINE_ERROR,
 	TEAM_REMOVE,
 	TEAM_REMOVE_SUCCESS,
-	TEAM_REMOVE_ERROR
+	TEAM_REMOVE_ERROR,
+	INVITE_RECEIVE,
+	INVITE_CANCEL,
+	INVITE_DECLINE,
+	INVITE_ACCEPT,
 } from './constants'
 
 import { DATA_REQUEST_SUCCESS } from '../dashboard/constants'
 
-import { deleteByObj, deleteById } from '../lib/reducers'
+import { deleteById } from '../lib/reducers'
 
 const initialState = {
 	userId: '',
@@ -195,9 +199,9 @@ const reducer = function(state = initialState, action) {
 		case TEAM_REMOVE_SUCCESS:
 			return {
 				...state,
-				teamReceived: isEmpty(state.team, action.user, deleteById),
 				requesting: false,
 				successful: true,
+				team: deleteById(state.team, action.user)
 			}
 
 		case TEAM_REMOVE_ERROR:
@@ -209,6 +213,31 @@ const reducer = function(state = initialState, action) {
 					body: action.error.toString(),
 					time: Date.now(),
 				}])
+			}
+
+		case INVITE_RECEIVE:
+			return {
+				...state,
+				teamReceived: [...state.teamReceived, action.user ]
+			}
+
+		case INVITE_CANCEL:
+			return {
+				...state,
+				teamReceived: deleteById(state.teamSend, action.user)
+			}
+
+		case INVITE_ACCEPT:
+			return {
+				...state,
+				team: [...state.team, action.user],
+				teamSend: deleteById(state.teamSend, action.user)
+			}
+
+		case INVITE_DECLINE:
+			return {
+				...state,
+				teamSend: deleteById(state.teamSend, action.user)
 			}
 
 		default:

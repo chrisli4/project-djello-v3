@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import classNames from 'classnames'
 import { cardCreate } from './actions'
 import CustomForm from '../elements/form'
-import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal } from 'mdbreact'
+import { Modal } from 'mdbreact'
 
-class CardForm extends React.Component {
+class CardForm extends Component {
     	constructor() {
 		super()
 		this.state = {

@@ -5,8 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStroopwafel, faPlus, faUsers, faUser, faHome, faChalkboard, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
-import { Container } from 'mdbreact'
-import Main from './main'
+import Dashboard from './dashboard'
 import Login from './login'
 import Signup from './signup'
 
@@ -20,7 +19,7 @@ class App extends Component {
 					<Switch>
 						<Route path='/register' component={Signup} />
 						<Route path='/login' component={Login} />
-						<Route path='/home' component={Main} />
+						<Route path='/home' component={Dashboard} />
 					</Switch>
 			</div>
 			);

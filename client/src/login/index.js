@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import loginRequest from './actions';
-import { Container, Row, Col, Input, Button } from 'mdbreact';
+import { Container, Row, Col } from 'mdbreact';
 import { Field, reduxForm } from 'redux-form'
-import { history } from '../'
 
 class Login extends Component {
 

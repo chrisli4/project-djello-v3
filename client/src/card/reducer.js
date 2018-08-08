@@ -11,7 +11,8 @@ import {
 	CARD_DELETE_ERROR,
 	CARD_ADD_MEMBER,
 	CARD_DELETE_MEMBER,
-	CARD_RECEIVE_UPDATE
+	CARD_RECEIVE_UPDATE,
+	CARD_RECEIVE_DELETE
 } from './constants'
 
 import { DATA_REQUEST_SUCCESS } from '../dashboard/constants'
@@ -126,6 +127,12 @@ const reducer = function(state = initialState, action) {
 					...state.byId,
 					[action.card._id]: action.card
 				}
+			}
+
+		case CARD_RECEIVE_DELETE:
+			return {
+				...state,
+				byId: deleteByObj(state.byId, action.card)
 			}
 
 		case CARD_DELETE: 

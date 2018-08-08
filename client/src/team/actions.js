@@ -14,7 +14,11 @@ import {
 	TEAM_DECLINE_ERROR,
 	TEAM_REMOVE,
 	TEAM_REMOVE_SUCCESS,
-	TEAM_REMOVE_ERROR
+	TEAM_REMOVE_ERROR,
+	INVITE_RECEIVE,
+	INVITE_CANCEL,
+	INVITE_ACCEPT,
+	INVITE_DECLINE
 } from './constants'
 
 import makeActionCreator from '../makeActionCreator'
@@ -39,3 +43,8 @@ export const teamDeclineError 		= makeActionCreator(TEAM_DECLINE_ERROR, 'error')
 export const teamRemove 			= makeActionCreator(TEAM_REMOVE, 'user', 'userToRemove')
 export const teamRemoveSuccess 		= makeActionCreator(TEAM_REMOVE_SUCCESS, 'user')
 export const teamRemoveError 		= makeActionCreator(TEAM_REMOVE_ERROR, 'error')
+
+export const inviteReceive = makeActionCreator(INVITE_RECEIVE, 'user')
+export const inviteCancel = makeActionCreator(INVITE_CANCEL, 'user')
+export const inviteAccept = makeActionCreator(INVITE_ACCEPT, 'user')
+export const inviteDecline = makeActionCreator(INVITE_DECLINE, 'user')

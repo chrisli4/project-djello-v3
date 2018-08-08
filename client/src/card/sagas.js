@@ -1,7 +1,6 @@
 import {
 	cardCreateSuccess,
 	cardCreateError,
-	cardUpdateSubmit,
 	cardUpdateSuccess,
 	cardUpdateError,
 	cardDeleteSuccess,

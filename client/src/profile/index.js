@@ -6,8 +6,19 @@ class Profile extends Component {
 
 	render() {
 		return (
-			<Container className='mt-5'>
-
+			<Container>
+				<Row>
+					<div className='col text-left my-1'>
+						<div disabled name='title' className='form-control-plaintext h1-responsive'>Edit Profile</div>
+					</div>
+				</Row>
+				<Row>
+					<div className='col text-left my-1'>
+						<div disabled name='description' className='form-control-plaintext lead grey-text'>Edit your personal information</div>
+					</div>
+				</Row>
+			
+				<hr />
 				<Card className='mx-auto mt-2' style={{maxWidth:"450px"}}>
 					<CardHeader border="default" color="default-color" className='text-center'>
 						<h3 className='py-1'>Profile</h3>

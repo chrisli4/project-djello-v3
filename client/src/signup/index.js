@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import signupRequest from './actions';
-import { Container, Row, Col, Button } from 'mdbreact';
+import { Container, Row, Col } from 'mdbreact';
 import { Field, reduxForm } from 'redux-form'
-import { history } from '../'
 
 class Signup extends Component {
 

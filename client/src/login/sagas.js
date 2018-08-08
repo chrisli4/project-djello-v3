@@ -1,5 +1,4 @@
 import { take, fork, cancel, call, put, cancelled } from 'redux-saga/effects';
-import { handleApiErrors } from '../lib/api-errors';
 import { LOGIN_REQUESTING, LOGIN_SUCCESS, LOGIN_ERROR } from './constants';
 import { userSet, userUnset } from '../user/actions';
 import { USER_UNSET } from '../user/constants';

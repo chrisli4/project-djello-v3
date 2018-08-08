@@ -1,6 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { SIGNUP_REQUESTING, SIGNUP_SUCCESS, SIGNUP_ERROR } from './constants';
-import { handleApiErrors } from '../lib/api-errors';
 import { fetchAPI, makeUserOptions } from '../lib/api'
 import { history } from '../'
 

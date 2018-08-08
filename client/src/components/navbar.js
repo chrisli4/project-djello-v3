@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import classNames from 'classnames';
-import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink } from 'mdbreact';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { userUnset} from '../user/actions'
 
-class CustomNavbar extends React.Component {
+class CustomNavbar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

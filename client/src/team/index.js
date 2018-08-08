@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Container } from 'mdbreact'
-import { Field, reduxForm } from 'redux-form'
 import { dataRequest } from '../dashboard/actions'
 import { userSet } from '../user/actions'
 import { teamSend, teamSendCancel, teamAccept, teamDecline, teamRemove } from './actions'
-import { Card, CardHeader, CardBody, CardFooter, CardImage, CardTitle, CardText, Button, ListGroup, ListGroupItem, Row, Col } from 'mdbreact'
+import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Col } from 'mdbreact'
 
 class Team extends Component {
 
@@ -49,10 +48,20 @@ class Team extends Component {
 
 	render() {
 
-		const { handleSubmit } = this.props
-
 		return (
 			<Container>
+							<Row>
+					<div className='col text-left my-1'>
+						<div disabled name='title' className='form-control-plaintext h1-responsive'>Team Management</div>
+					</div>
+				</Row>
+				<Row>
+					<div className='col text-left my-1'>
+						<div disabled name='description' className='form-control-plaintext lead grey-text'>Add and remove users from your team</div>
+					</div>
+				</Row>
+			
+				<hr />
 				<Row>
 					<Col className='p-3'>
 						<Row className='my-3 p-2'>

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listCreate } from './actions'
 import CustomForm from '../elements/form'
-import { Button, Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal } from 'mdbreact'
+import { Modal } from 'mdbreact'
 
-class ListForm extends React.Component {
+class ListForm extends Component {
   
     	constructor() {
 		super()
@@ -28,7 +28,7 @@ class ListForm extends React.Component {
   render() {
     return (
     		<React.Fragment>
-    			<Button color='primary' onClick={this.onToggle}>New List</Button>
+    			<button className='btn-primary' onClick={this.onToggle}>New List</button>
     			<Modal isOpen={this.state.modalOpen} toggle={this.onToggle} size="lg">
     				<CustomForm onSubmit={this.onSubmit} form='list'/>
     			</Modal>

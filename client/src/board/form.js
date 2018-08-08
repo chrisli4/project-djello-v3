@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { boardCreate } from './actions'
 import CustomForm from '../elements/form'
-import { Button, Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal } from 'mdbreact'
+import { Modal } from 'mdbreact'
 
 class BoardForm extends Component {
   
@@ -29,7 +29,7 @@ class BoardForm extends Component {
   render() {
     return (
     		<React.Fragment>
-    			<Button onClick={this.onToggle}>New Board</Button>
+    			<button className='btn-primary' onClick={this.onToggle}>New Board</button>
     			<Modal isOpen={this.state.modalOpen} toggle={this.onToggle} size="lg">
     				<CustomForm onSubmit={this.onSubmit} form='board'/>
     			</Modal>

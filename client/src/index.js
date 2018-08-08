@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 
 import createHistory from 'history/createBrowserHistory'
-import { Route } from 'react-router'
 
 import createSagaMiddleware from 'redux-saga'
 import registerServiceWorker from './registerServiceWorker'
@@ -13,7 +12,6 @@ import registerServiceWorker from './registerServiceWorker'
 import {
 	ConnectedRouter,
 	routerMiddleware,
-	push
 } from 'react-router-redux'
 
 import App from './App'
