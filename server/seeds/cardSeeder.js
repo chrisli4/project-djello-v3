@@ -37,10 +37,11 @@ mongooseeder.seed({
     for(let i = 132; i < 142; i++) {
 
       let genRan = getRandomInt(40, 50);
+      let genRanId = getRandomInt(2, 4);
 
       var card = new Card({
         _id: `foobar${ i }`,
-        userId: `test2`,
+        userId: `test${genRanId}`,
         listId: `bar${ genRan }`,
         title: faker.name.title(),
         description: faker.company.bs(),

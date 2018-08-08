@@ -6,12 +6,15 @@ const app 	  = express();
 
 // socket.io
 const http = require('http').createServer(app);
-const socketIo = require('socket.io')(http);
+const io = require('socket.io')(http);
 
-socketIo.on('connection', () => {
+io.on('connection', (socket) => {
   console.log('user connected')
+  socket.on('userConnected', socket.join)
+  socket.on('userDisconnected', socket.leave)
 })
-app.set('socketIo', socketIo);
+
+app.set('socketIo', io);
 
 const config = require('./config/main')
 // mongoose ===================================================================

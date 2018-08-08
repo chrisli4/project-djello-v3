@@ -88,16 +88,20 @@ router.post('/remove', function(req, res) {
 	const userA = req.body.user.username
 	const userB = req.body.userB
 
+	let io = req.app.get('socketIo');
+
 	inTeam(userA, userB)
 		.then(team => {
 			if(team) {
 				Promise.all([remove(userA, userB), remove(userB, userA)])
-					.then(() =>
+					.then(() => {
+						io.sockets.to(userB).emit('TEAM_REMOVE', userA)
 						res.status(200).json(userB)
-							)
+							})
 							.catch(e =>
 								res.status(500).json(e.stack)
 								)
+					
 			} else
 				res.status(200).json(null)
 		})
@@ -109,6 +113,8 @@ router.post('/accept', function(req, res) {
 	const userA = req.body.user.username
 	const userB = req.body.userB
 
+	let io = req.app.get('socketIo');
+
 	inReceived(userA, userB)
 		.then(receive => {
 			if(receive && (userA !== userB) ) {
@@ -116,9 +122,10 @@ router.post('/accept', function(req, res) {
 					.then(() =>
 						accept(userB, userA)
 						)
-						.then(() =>
+						.then(() => {
+							io.sockets.to(userB).emit('INVITE_ACCEPT', userA)
 							res.status(200).json(userB)
-							)
+							})
 						.catch(e => 
 							res.status(500).json(e.stack)
 							)
@@ -133,15 +140,18 @@ router.post('/send', function(req, res) {
 	const userA = req.body.user.username
 	const userB = req.body.userB
 
+	let io = req.app.get('socketIo');
+
 //check that userB is not in team, not in sent, user exists, and userB is not self
 
 	Promise.all([inTeam(userA, userB), inSend(userA, userB), inUser(userB)])
 			.then(([t, s, u]) => {
 				if(!t && !s && u && (userA !== userB)) {
 					Promise.all([send(userA, userB), receive(userA, userB)])
-						.then(() =>
+						.then(() => {
+							io.sockets.to(userB).emit('INVITE_RECEIVE', userA)
 							res.status(200).json(userB)
-							)
+							})
 				} else
 					res.status(200).json(null)
 			})
@@ -157,14 +167,17 @@ router.post('/cancel', function(req, res) {
 	const userA = req.body.user.username
 	const userB = req.body.userB
 
+	let io = req.app.get('socketIo');
+
 //check invite was sent to userB
 	inSend(userA, userB)
 		.then(s => {
 			if(s) {
 				cancel(userA, userB)
-					.then(() =>
+					.then(() => {
+						io.sockets.to(userB).emit('INVITE_CANCEL', userA)
 						res.status(200).json(userB)
-						)
+						})
 			} else 
 				res.status(200).json(null)
 		})
@@ -179,6 +192,8 @@ router.post('/decline', function(req, res) {
 	const userA = req.body.user.username
 	const userB = req.body.userB
 
+	let io = req.app.get('socketIo');
+
 	inReceived(userA, userB)
 		.then(r => {
 			if(r) {
@@ -186,9 +201,10 @@ router.post('/decline', function(req, res) {
 					.then(() =>
 						declined(userA, userB)
 						)
-						.then(() =>
+						.then(() => {
+							io.sockets.to(userB).emit('INVITE_DECLINE', userA)
 							res.status(200).json(userB)
-							)
+							})
 						.catch(e => {
 							res.status(500).json(e.stack)
 							})

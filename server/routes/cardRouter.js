@@ -36,9 +36,9 @@ router.post('/', function(req, res) {
 	})
 
 	card.save()
-	.then(saved =>
+	.then(saved => {
 		res.status(200).json(saved)
-		)
+		})
 	.catch(e =>
 		res.status(500).json(e)
 		)
@@ -49,7 +49,7 @@ router.post('/', function(req, res) {
 router.put('/:cardId', function(req, res) {
 	
 	let input = req.body.card
-	var socket = req.app.get('socketIo');
+	let io = req.app.get('socketIo');
 
 	Card.findOne({ _id: input._id })
 	.then(card =>
@@ -59,26 +59,29 @@ router.put('/:cardId', function(req, res) {
 		card.save()
 		)
 	.then(updated => {
-		socket.emit('CARD_UPDATE', updated)
+		io.emit('CARD_UPDATE', updated)
 		res.status(200).json(updated)
 		})
-	.catch(e => 
+	.catch(e => {
+		console.log(e.stack)
 		res.status(500).json(e)
-		)
+		})
 })
 
 // delete card
 router.delete('/:cardId', function(req, res) {
 
 	let input = req.body.card
+	let io = req.app.get('socketIo');
 
 	Card.findOne({ _id: input._id })
 	.then(card =>
 		card.remove()
 		)
-	.then(deleted =>
+	.then(deleted => {
+		io.emit('CARD_DELETE', deleted)
 		res.status(200).json(deleted)
-		)
+		})
 	.catch(e =>
 		res.status(500).json(e)
 		)
