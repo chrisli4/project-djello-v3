@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest, all } from 'redux-saga/effects'
 import { fetchAPI, makeOptions } from '../lib/api'
 
 
@@ -75,13 +75,13 @@ function* teamRemoveFlow(action) {
 }
 
 function* teamWatcher() {
-	yield [
+	yield all([
 		takeLatest(TEAM_SEND, teamSendFlow),
 		takeLatest(TEAM_SEND_CANCEL, teamSendCancelFlow),
 		takeLatest(TEAM_ACCEPT, teamAcceptFlow),
 		takeLatest(TEAM_DECLINE, teamDeclineFlow),
 		takeLatest(TEAM_REMOVE, teamRemoveFlow)
-	]
+	])
 }
 
 export default teamWatcher

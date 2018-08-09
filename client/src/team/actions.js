@@ -44,7 +44,7 @@ export const teamRemove 			= makeActionCreator(TEAM_REMOVE, 'user', 'userToRemov
 export const teamRemoveSuccess 		= makeActionCreator(TEAM_REMOVE_SUCCESS, 'user')
 export const teamRemoveError 		= makeActionCreator(TEAM_REMOVE_ERROR, 'error')
 
-export const inviteReceive = makeActionCreator(INVITE_RECEIVE, 'user')
-export const inviteCancel = makeActionCreator(INVITE_CANCEL, 'user')
-export const inviteAccept = makeActionCreator(INVITE_ACCEPT, 'user')
-export const inviteDecline = makeActionCreator(INVITE_DECLINE, 'user')
+export const inviteReceive 			= makeActionCreator(INVITE_RECEIVE, 'user')
+export const inviteCancel 			= makeActionCreator(INVITE_CANCEL, 'user')
+export const inviteAccept 			= makeActionCreator(INVITE_ACCEPT, 'user')
+export const inviteDecline 			= makeActionCreator(INVITE_DECLINE, 'user')

@@ -19,7 +19,7 @@ import { DATA_REQUEST_SUCCESS } from '../dashboard/constants'
 import { BOARD_DELETE_SUCCESS } from '../board/constants'
 import { LIST_DELETE_SUCCESS } from '../list/constants'
 
-import { deleteByObj, deleteByProp, deleteById } from '../lib/reducers'
+import { deleteByObj, deleteByProp, deleteById, deleteByArr } from '../lib/reducers'
 
 const initialState = {
 	byId: {},
@@ -205,7 +205,7 @@ const reducer = function(state = initialState, action) {
 		case BOARD_DELETE_SUCCESS:
 			return {
 				...state,
-				byId: deleteByProp(state.byId, 'listId', action.board.lists)
+				byId: deleteByArr(state.byId, 'listId', action.board.lists)
 			}
 
 		case LIST_DELETE_SUCCESS:

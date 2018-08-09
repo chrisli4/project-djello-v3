@@ -7,7 +7,7 @@ import {
 	listDeleteError,
 } from './actions'
 
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest, all } from 'redux-saga/effects'
 import { fetchAPI, makeOptions } from '../lib/api' 
 import { LIST_CREATE, LIST_UPDATE_SUBMIT, LIST_DELETE } from './constants'
 
@@ -45,11 +45,11 @@ function* listDeleteFlow(action) {
 }
 
 function* listWatcher() {
-	yield [
+	yield all([
 		takeLatest(LIST_CREATE, listCreateFlow),
 		takeLatest(LIST_UPDATE_SUBMIT, listUpdateFlow),
 		takeLatest(LIST_DELETE, listDeleteFlow),
-	]
+	])
 }
 
 export default listWatcher

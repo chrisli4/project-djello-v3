@@ -8,6 +8,8 @@ import { Card, CardHeader, CardBody, CardFooter, ListGroup, Row } from 'mdbreact
 
 import CustomCard from '../card'
 import CardForm from '../card/form'
+import Input from '../components/input'
+import Textarea from '../components/textarea'
 
 class List extends Component {
 	
@@ -58,23 +60,30 @@ class List extends Component {
 		return (
 			<Card>
 				<CardHeader border="primary" color="primary-color">
-				<Row>
-					<div onDoubleClick={this.onDisableTitle} className='mx-auto'>
-						<input onChange={this.onUpdate} disabled={this.state.disableTitle} name='title' value={this.props.list.title} className='form-control-plaintext text-center white-text'/>
-					</div>
-				</Row>
+					<Input 
+						name='title'
+						value={this.props.list.title}
+						disabled={this.state.disableTitle}
+						onDoubleClick={this.onDisableTitle} 
+						onChange={this.onUpdate}  
+						outerClass='mx-auto' 
+						innerClass='form-control-plaintext text-center white-text'
+					/>
 				</CardHeader>
 				<CardBody>
-								
-					<div onDoubleClick={this.onDisableDescr} className='mx-auto'>
-						<textarea onChange={this.onUpdate} disabled={this.state.disableDescr} name='description' value={this.props.list.description} rows="3" spellCheck="false" className="form-control-plaintext small py-3 px-2 mb-3"/>
-					</div>
-				
-				<ListGroup>
-					{ this.props.list.cards.map(cardId =>
-						<CustomCard key={cardId} _id={cardId} listTitle={this.props.list.title}/>
-						)}
-				</ListGroup>
+					<Textarea
+						name='description' 
+						value={this.props.list.description}
+						disabled={this.state.disableDescr}  
+						onDoubleClick={this.onDisableDescr} 
+						onChange={this.onUpdate} 
+						innerClass='form-control-plaintext small py-3 px-2 mb-3'
+					/>
+					<ListGroup>
+						{ this.props.list.cards.map(cardId => 
+							<CustomCard key={cardId} _id={cardId} listTitle={this.props.list.title}/>
+							)}
+					</ListGroup>
 				</CardBody>
 				<CardFooter>
 					<Row className='justify-content-center'>
@@ -84,8 +93,7 @@ class List extends Component {
 					</Row>
 				</CardFooter>
 			</Card>
-
-			)
+		)
 	}
 }
 

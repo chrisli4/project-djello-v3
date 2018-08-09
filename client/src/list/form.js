@@ -28,7 +28,7 @@ class ListForm extends Component {
   render() {
     return (
     		<React.Fragment>
-    			<button className='btn-primary' onClick={this.onToggle}>New List</button>
+    			<button className='btn btn-primary' onClick={this.onToggle}>New List</button>
     			<Modal isOpen={this.state.modalOpen} toggle={this.onToggle} size="lg">
     				<CustomForm onSubmit={this.onSubmit} form='list'/>
     			</Modal>

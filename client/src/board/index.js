@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Container, Row } from 'mdbreact'
 
 import { boardUpdate, boardUpdateSubmit, boardDelete } from './actions';
@@ -9,6 +8,7 @@ import BoardDropdown from './dropdown'
 import BoardForm from './form'
 import List from '../list'
 import ListForm from '../list/form'
+import Input from '../components/input'
 
 class Board extends Component {
 
@@ -58,24 +58,29 @@ class Board extends Component {
 
 	render() {
 		return (
-				<Container>
+			<Container>
 				<Row className='justify-content-end'>
 					<BoardDropdown />
 					<BoardForm />
 				</Row>
-				
-			<div>
-				<Row>
-					<div onDoubleClick={this.onDisableTitle} className='col text-left my-1'>
-						<input onChange={this.onUpdate} disabled={this.state.disableTitle} name='title' value={this.props.board.title} className='form-control-plaintext h1-responsive'/>
-					</div>
-				</Row>
-				<Row>
-					<div onDoubleClick={this.onDisableDescr} className='col text-left my-1'>
-						<input onChange={this.onUpdate} disabled={this.state.disableDescr} name='description' value={this.props.board.description} className='form-control-plaintext lead'/>
-					</div>
-				</Row>
-			
+				<Input 
+					name='title'
+					value={this.props.board.title}
+					disabled={this.state.disableTitle}
+					onDoubleClick={this.onDisableTitle} 
+					onChange={this.onUpdate}  
+					outerClass='col text-left my-1' 
+					innerClass='form-control-plaintext h1-responsive'
+				/>
+				<Input
+					name='description' 
+					value={this.props.board.description}
+					disabled={this.state.disableDescr}  
+					onDoubleClick={this.onDisableDescr} 
+					onChange={this.onUpdate} 
+					outerClass='col text-left my-1' 
+					innerClass='form-control-plaintext lead'
+				/>
 				<hr />
 				<Row>
 					{ this.props.board.lists.map(listId =>
@@ -84,12 +89,11 @@ class Board extends Component {
 						</div>
 						)}
 				</Row>
-				<Row className='my-3 justify-content-end'>
+				<Row className='my-3 pt-3 justify-content-end'>
 					<ListForm />
 					<button className='btn btn-primary' onClick={this.onUpdateSubmit}>Save</button>
 					<button className='btn btn-danger' onClick={this.onDelete}>Delete Board</button>
 				</Row>
-			</div>
 			</Container>
 			)
 	}

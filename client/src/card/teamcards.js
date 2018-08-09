@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Col, Container, Card, CardHeader, CardBody, ListGroup, Row } from 'mdbreact'
 
 import TeamCard from './teamcard'
+import Header from '../components/header';
 
 class TeamCards extends Component {
 
@@ -16,26 +17,17 @@ class TeamCards extends Component {
 
 		return (
 			<Container>
-				<Row>
-					<div className='col text-left my-1'>
-						<div disabled name='title' className='form-control-plaintext h1-responsive'>Team Cards</div>
-					</div>
-				</Row>
-				<Row>
-					<div className='col text-left my-1'>
-						<div disabled name='description' className='form-control-plaintext lead grey-text'>Cards shared by team members</div>
-					</div>
-				</Row>
+				<Header title='Team Cards' description='Cards shared by team members'/>
 			
-				<hr />
+				<hr className='my-3' />
 				<Row>
 				{ ownerIds.map(ownerId => {
 					return (
 						<Col className='col-4' key={ownerId}>
 						<Card>
-						<CardHeader className="p-3 justify-content-center" color="primary-color">
-						 	<span>{ownerId}</span>
-						</CardHeader>
+				<CardHeader className='text-center' border="primary" color="primary-color">
+				{ownerId}
+				</CardHeader>
 						<CardBody>
 						<ListGroup>
 						{ this.props.teamCards[ownerId].map(cardId => {

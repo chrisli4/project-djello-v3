@@ -1,2 +1,6 @@
 export const USER_SET = 'USER_SET';
 export const USER_UNSET = 'USER_UNSET';
+export const USER_UPDATE = 'USER_UPDATE';
+export const USER_UPDATE_SUBMIT = 'USER_UPDATE_SUBMIT'
+export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS'
+export const USER_UPDATE_ERROR = 'USER_UPDATE_ERROR'

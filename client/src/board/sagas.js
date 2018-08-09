@@ -45,11 +45,11 @@ function* boardDeleteFlow(action) {
 }
 
 function* boardWatcher() {
-	yield [
+	yield all([
 		takeLatest(BOARD_CREATE, boardCreateFlow),
 		takeLatest(BOARD_UPDATE_SUBMIT, boardUpdateFlow),
 		takeLatest(BOARD_DELETE, boardDeleteFlow),
-	]
+	])
 }
 
 export default boardWatcher

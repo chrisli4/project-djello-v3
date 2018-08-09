@@ -7,7 +7,7 @@ import {
 	cardDeleteError,
 } from './actions'
 
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest, all } from 'redux-saga/effects'
 import { fetchAPI, makeOptions } from '../lib/api' 
 import { CARD_CREATE, CARD_UPDATE_SUBMIT, CARD_DELETE } from './constants'
 
@@ -45,11 +45,11 @@ function* cardDeleteFlow(action) {
 }
 
 function* cardWatcher() {
-	yield [
+	yield all([
 		takeLatest(CARD_CREATE, cardCreateFlow),
 		takeLatest(CARD_UPDATE_SUBMIT, cardUpdateFlow),
 		takeLatest(CARD_DELETE, cardDeleteFlow),
-	]
+	])
 }
 
 export default cardWatcher

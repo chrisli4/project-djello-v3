@@ -1,6 +1,7 @@
 import {
 	USER_SET,
 	USER_UNSET,
+	USER_UPDATE
 } from './constants';
 
 const initialState = {
@@ -28,6 +29,12 @@ const reducer = function(state = initialState, action) {
 				lastName: '',
 				token: '',
 			};
+
+		case USER_UPDATE:
+			return {
+				...state,
+				[action.field]: action.value
+			}
 
 		default:
 			return state;

@@ -29,7 +29,7 @@ class BoardForm extends Component {
   render() {
     return (
     		<React.Fragment>
-    			<button className='btn-primary' onClick={this.onToggle}>New Board</button>
+    			<button className='btn btn-primary' onClick={this.onToggle}>New Board</button>
     			<Modal isOpen={this.state.modalOpen} toggle={this.onToggle} size="lg">
     				<CustomForm onSubmit={this.onSubmit} form='board'/>
     			</Modal>

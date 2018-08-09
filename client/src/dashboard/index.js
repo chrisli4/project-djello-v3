@@ -11,7 +11,7 @@ import { inviteReceive, inviteCancel, inviteDecline, inviteAccept } from '../tea
 
 import Navbar from '../components/navbar'
 import Board from '../board'
-import Profile from '../profile'
+import Profile from '../user'
 import Team from '../team'
 import TeamCards from '../card/teamcards'
 
@@ -20,7 +20,7 @@ class Dashboard extends Component {
 
 	componentDidMount() {
 		this.props.dataRequest({ username: 'test1', token: 'test' })
-		this.props.userSet({ user: { username: 'test1'}, token: 'test' })
+		this.props.userSet({ user: { username: 'test1', firstName: 'test', lastName: '1'}, token: 'test' })
 		const socket = io('http://localhost:3001')
 
 		socket.on('connect', () => {
@@ -68,14 +68,11 @@ class Dashboard extends Component {
 		})
 	}
 
-
-
-
 	render() {
 		return (
 			<div>
 				<Navbar />
-				<div className='mt-3 pt-3'>
+				<div className='mt-3 pt-4'>
 					<Switch>
 						<Route path='/home/profile' component={Profile} />
 						<Route path='/home/teamcards' component={TeamCards} />
