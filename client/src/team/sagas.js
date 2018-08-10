@@ -21,7 +21,6 @@ import { TEAM_SEND, TEAM_SEND_CANCEL, TEAM_ACCEPT, TEAM_DECLINE, TEAM_REMOVE } f
 function* teamSendFlow(action) {
 	try {
 		const { user, userToSend } = action
-		console.log(user, userToSend)
 		const URL = `http://localhost:3001/users/${user.username}/team/send`
 		const found = yield call(fetchAPI, URL, makeOptions('POST', user, { userB: userToSend }))
 		yield put(teamSendSuccess(found))

@@ -10,6 +10,7 @@ import CustomCard from '../card'
 import CardForm from '../card/form'
 import Input from '../components/input'
 import Textarea from '../components/textarea'
+import Span from '../components/span'
 
 class List extends Component {
 	
@@ -88,8 +89,8 @@ class List extends Component {
 				<CardFooter>
 					<Row className='justify-content-center'>
 						<CardForm _id={this.props.list._id} />
-						<span onClick={this.onUpdateSubmit} className='p-2 small border border-light grey lighten-5'>Save List</span>
-						<span onClick={this.onDelete} className='p-2 small border border-light grey lighten-5 rounded-right'>Delete List</span>
+						<Span onClick={this.onUpdateSubmit} text='Save List' className='p-2 small border border-light'/>
+						<Span onClick={this.onDelete} text='Delete List' className='p-2 small border border-light rounded-right'/>
 					</Row>
 				</CardFooter>
 			</Card>
@@ -101,7 +102,6 @@ const mapStateToProps = (state, ownProps) => ({
 	list: state.lists.byId[ownProps._id],
 	user: state.user
 })
-
 
 const mapDispatchToProps = { 
 	cardCreate,

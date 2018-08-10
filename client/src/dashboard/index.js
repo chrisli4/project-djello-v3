@@ -19,8 +19,9 @@ import TeamCards from '../card/teamcards'
 class Dashboard extends Component {
 
 	componentDidMount() {
-		this.props.dataRequest({ username: 'test1', token: 'test' })
-		this.props.userSet({ user: { username: 'test1', firstName: 'test', lastName: '1'}, token: 'test' })
+
+		this.props.dataRequest(this.props.user)
+
 		const socket = io('http://localhost:3001')
 
 		socket.on('connect', () => {
@@ -100,4 +101,4 @@ const mapDispatchToProps = {
 	userSet
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps, null, {pure: false})(Dashboard)

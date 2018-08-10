@@ -5,6 +5,7 @@ import {
 } from './constants';
 
 const initialState = {
+	_id: '',
 	username: '',
 	email: '',
 	firstName: '',
@@ -23,6 +24,7 @@ const reducer = function(state = initialState, action) {
 
 		case USER_UNSET:
 			return {
+				_id: '',
 				username: '',
 				email: '',
 				firstName: '',

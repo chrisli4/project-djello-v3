@@ -32,7 +32,7 @@ class Profile extends Component {
 					<span name="userName" type="text" className="form-control grey-text">{this.props.user.username}</span>
 					<br/>
 					<label htmlFor="email" className="grey-text">Your email</label>
-					<input  name="email" type="email" value={this.props.user.email} onChange={this.onChange} className="form-control grey-text"/>
+					<span name="email" type="email" className="form-control grey-text">{this.props.user.email}</span>
 					<br/>
 					<label htmlFor="firstName" className="grey-text">Your first name</label>
 					<input  name="firstName" type="text" value={this.props.user.firstName} onChange={this.onChange} className="form-control grey-text"></input>

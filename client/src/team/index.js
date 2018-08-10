@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Container } from 'mdbreact'
 import { teamSend, teamSendCancel, teamAccept, teamDecline, teamRemove } from './actions'
-import { Card, CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Col } from 'mdbreact'
+import { ListGroup, ListGroupItem, Row, Col } from 'mdbreact'
 
 import Header from '../components/header'
 import CustomListGroup from '../components/group'

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames'
 import { cardCreate } from './actions'
 import CustomForm from '../elements/form'
 import { Modal } from 'mdbreact'
+import Span from '../components/span'
 
 class CardForm extends Component {
-    	constructor() {
+	constructor() {
 		super()
 		this.state = {
-			modalOpen: false,
-      hover: false,
+			modalOpen: false
 		}
-  }
+	}
 
 	onToggle = (e) => {
 		this.setState({
@@ -20,40 +19,23 @@ class CardForm extends Component {
 		})
 	}
 
-  onHover = (e) => {
-    this.setState({
-      hover: true
-    })
-  }
+	onSubmit = (values) => {
+		this.props.cardCreate(this.props.user, { userId: this.props.user.username, listId: this.props._id, ...values })
+		this.setState({
+			modalOpen: false
+		})
+	}
+	render() {
 
-  onLeave = (e) => {
-    this.setState({
-      hover: false
-    })
-  }
-
-  onSubmit = (values) => {
-  	this.props.cardCreate(this.props.user, { userId: this.props.user.username, listId: this.props._id, ...values })
-  	this.setState({
-  		modalOpen: false
-  	})
-  }
-  render() {
-
-    let names = classNames('p-2 small border border-light grey lighten-5 rounded-left', {
-      'grey lighten-4': this.state.hover,
-      'grey lighten-5': !this.state.hover,
-    })
-
-    return (
-    		<React.Fragment>
-    			<span onClick={this.onToggle} onMouseEnter={this.onHover} onMouseLeave={this.onLeave} className={names}>Add Card</span>
-    			<Modal isOpen={this.state.modalOpen} toggle={this.onToggle} size="lg">
-    				<CustomForm onSubmit={this.onSubmit} form='card'/>
-    			</Modal>
-    		</React.Fragment>
-    	)
-  }
+		return (
+			<React.Fragment>
+				<Span onClick={this.onToggle} text='Add Card' className='p-2 small border border-light rounded-left'/>
+				<Modal isOpen={this.state.modalOpen} toggle={this.onToggle} size="lg">
+					<CustomForm onSubmit={this.onSubmit} form='card'/>
+				</Modal>
+			</React.Fragment>
+			)
+	}
 }
 
 const mapStateToProps = (state) => ({

@@ -18,15 +18,8 @@ import { LIST_CREATE_SUCCESS, LIST_DELETE_SUCCESS } from '../list/constants'
 import { deleteByObj, deleteById, isEmpty } from '../lib/reducers'
 
 const initialState = {
-	current: 'i',
-	byId: {
-		'i': {
-			_id: '',
-			title: '',
-			description: '',
-			lists: [],
-		}
-	},
+	current: '',
+	byId: {},
 	requesting: false,
 	successful: false,
 	messages: [],
@@ -153,7 +146,7 @@ const reducer = function(state = initialState, action) {
 			}],
 			errors: [],
 			byId: deleteByObj(state.byId, action.board),
-			current: Object.keys(state.byId)[1]
+			current: Object.keys(state.byId)[0] || '',
 		}
 
 		case BOARD_DELETE_ERROR:
@@ -171,7 +164,7 @@ const reducer = function(state = initialState, action) {
 		case DATA_REQUEST_SUCCESS: 
 		return {
 			...state,
-			current: Object.keys(action.data.boards)[0] || 'i',
+			current: Object.keys(action.data.boards)[0] || '',
 			byId: isEmpty(action.data.boards)
 		}
 

@@ -100,7 +100,7 @@ class Board extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	board: state.boards.byId[state.boards.current],
+	board: state.boards.byId[state.boards.current] || { title: '', description: '', lists: [] },
 	user: state.user
 })
 

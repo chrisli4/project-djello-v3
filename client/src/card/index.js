@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import { cardUpdate, cardUpdateSubmit, cardDelete, cardAddMember, cardDeleteMember } from './actions';
 
-import { CardHeader, CardBody, CardFooter, ListGroup, ListGroupItem, Row, Modal, FormInline } from 'mdbreact'
+import { CardHeader, CardBody, CardFooter, ListGroupItem, Row, Modal, FormInline } from 'mdbreact'
 
 import Input from '../components/input'
 import Textarea from '../components/textarea'

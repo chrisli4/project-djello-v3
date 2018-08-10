@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router'
+import { Route, Switch, Redirect } from 'react-router'
+import { connect } from 'react-redux'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStroopwafel, faPlus, faUsers, faUser, faHome, faChalkboard, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
@@ -18,11 +19,22 @@ class App extends Component {
 					<Switch>
 						<Route path='/register' component={Signup} />
 						<Route path='/login' component={Login} />
-						<Route path='/home' component={Dashboard} />
+						<Route path='/home' render={() => {
+							return (
+								this.props.user.username ? 
+									<Dashboard />
+									: <Redirect to='/login' />
+								)
+						}} />
+						/>
 					</Switch>
 			</div>
 			);
 	}
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+	user: state.user
+})
+
+export default connect(mapStateToProps, null, null, {pure: false})(App)

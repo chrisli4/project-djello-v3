@@ -8,6 +8,10 @@ export const fetchAPI = function(URL, options) {
 	.catch(error => { throw error });
 }
 
+const removeJWT = (token) => {
+	return token.slice(4)
+}
+
 export const makeOptions = function(method, user, item) {	
 	
 	let options = {
@@ -15,7 +19,7 @@ export const makeOptions = function(method, user, item) {
 		mode: 'cors',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': user.token
+			'Authorization': `Bearer ${removeJWT(user.token)}`
 		}
 	}
 
