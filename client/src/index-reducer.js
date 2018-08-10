@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form'
-import { reducer as notifReducer } from 'redux-notifications';
 import signup from './signup/reducer'
 import login from './login/reducer'
 import user from './user/reducer'
@@ -22,8 +21,7 @@ const IndexReducer = combineReducers({
 	cards,
 	team,
 	router: routerReducer, 
-	form: formReducer,
-	notifs: notifReducer
+	form: formReducer
 })
 
 export default IndexReducer;
