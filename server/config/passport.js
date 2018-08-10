@@ -23,22 +23,26 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 })
 
 const jwtOptions = {
-	jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt"),
+	jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("Bearer"),
 	secretOrKey: config.secret
 }
 
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
 
-	console.log(payload);
-
 	User.findById(payload._id, function(err, user) {
-		if(err) { return done(err, false); }
+		if(err) { 
+			console.log(err)
+			return done(err, false); }
 		if(user) {
+			console.log(user)
 			done(null, user);
 		} else {
 			done(null, false);
 		}
 	})
+	.catch(e => 
+		console.log(e.stack)
+		)
 })
 
 passport.use(jwtLogin);

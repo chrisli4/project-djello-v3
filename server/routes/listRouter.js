@@ -1,7 +1,6 @@
 const router = require('express').Router({ mergeParams: true })
 const cardRouter = require('./cardRouter')
 const shortid = require('shortid')
-
 const List = require('../models/list')
 
 // get list

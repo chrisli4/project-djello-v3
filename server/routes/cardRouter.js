@@ -1,14 +1,7 @@
 const router = require('express').Router({ mergeParams: true })
 const shortid = require('shortid')
-
 const Card = require('../models/card')
-const History = require('../models/history')
 
-function diff(a, b) {
-	return a.filter(i =>
-		b.indexOf(i) === -1
-	)
-}
 
 // get card
 router.get('/:cardId', function(req, res) {

@@ -7,13 +7,14 @@ const jwt = require('jsonwebtoken'),
 
 function generateToken(user) {
 	return jwt.sign(user, config.secret, {
-		expiresIn: 10080
+		expiresIn: 100800
 	})
 };
 
 
 function setUserInfo(request) {
 	return {
+		_id: request._id,
 		username: request.username,
 		firstName: request.firstName,
 		lastName: request.lastName,

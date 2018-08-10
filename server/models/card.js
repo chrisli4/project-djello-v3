@@ -46,31 +46,6 @@ CardSchema.pre('save', function(next) {
 		next();
 });
 
-/*
-CardSchema.pre('remove', function(next) {
-	this.model('Activity').remove({ cardId: this._id }, next)
-})
-
-CardSchema.pre('save', function(next) {
-	
-	let toAdd = diff(this.members, this._previousMembers)
-		
-	this.model('User').update({ _id: { $in: toAdd } }, { multi: true }, { $addToSet: { pending: this._id } }, next)
-})
-
-CardSchema.pre('save', function(next) {
-
-	let toDelete = diff(this._previousMembers, this.members)
-
-	this.model('User').update({ _id: { $in: toDelete } }, { multi: true }, { $pull: { cards: this._id } }, next)
-})
-
-function diff(a, b) {
-	return a.filter(i => {
-		return b.indexOf(i) === -1
-	})
-}
-*/
 
 module.exports = mongoose.model('Card', CardSchema)
 

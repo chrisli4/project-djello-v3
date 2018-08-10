@@ -9,7 +9,6 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
 io.on('connection', (socket) => {
-  console.log('user connected')
   socket.on('userConnected', socket.join)
   socket.on('userDisconnected', socket.leave)
 })
@@ -22,9 +21,11 @@ const mongoose = require('mongoose');
 mongoose.connect(config.database, { useNewUrlParser: true });
 
 // logging ====================================================================
+/*
 const logger = require('morgan');
 const morganToolkit = require('morgan-toolkit')(logger);
 app.use(morganToolkit());
+*/
 
 // body parser ================================================================
 const bodyParser = require('body-parser');
@@ -34,8 +35,7 @@ app.use(bodyParser.json());
 // enable CORS from client-side ===============================================
 
 app.use(function (req, res, next) {
-  const origin = req.get('origin');
-  res.header('Access-Control-Allow-Origin', origin);
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
@@ -44,7 +44,6 @@ app.use(function (req, res, next) {
   if (req.method === 'OPTIONS') {
     res.sendStatus(204);
   } else {
-    console.log(origin);
     next();
   }
 })
@@ -62,7 +61,7 @@ const userRouter = require('./routes/userRouter');
 
 app.post('/register', authController.register);
 app.post('/login', requireLogin, authController.login);
-app.use('/users', userRouter);
+app.use('/users', requireAuth, userRouter);
 
 // server  ====================================================================
 app.set('port', (process.env.PORT || 3001));

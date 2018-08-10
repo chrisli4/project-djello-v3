@@ -27,13 +27,7 @@ router.put('/:username', function(req, res) {
 
 	let input = req.body.user
 
-	User.findOne({ username: input.username })
-	.then(user =>
-		Object.assign(user, { ...input })
-		)
-	.then(user => 
-		user.save()
-		)
+	User.findOneAndUpdate({ username: input.username }, { $set: { firstName: input.firstName, lastName: input.lastName } })
 	.then(updated =>
 		res.status(200).json(updated)
 		)
